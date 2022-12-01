@@ -24,5 +24,4 @@ yarn-error.log*
 
 
 /public/*.js
-/public/*.html
 **/*Config.js*
