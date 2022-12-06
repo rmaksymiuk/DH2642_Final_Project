@@ -1,14 +1,14 @@
 import React from 'react'
 import Navbar from "./components/Navbar/Navbar"
-import Auth from "./components/SignIn/Auth"
 import './App.css';
+import Login from './components/LogIn/Login';
 
 
 function App() {
   return (
     <div className="App">
         <Navbar />
-        <Auth />
+        <Login />
     </div>
   );
 }
