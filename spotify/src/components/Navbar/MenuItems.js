@@ -1,26 +1,30 @@
 export const MenuItems = [
     {
         title: 'TOP TRACKS',
-        url: '#',
-        cName: 'nav-links'
+        url: '../TopTracks.js',
+        cName: 'nav-links',
+        hash: '#topTracks'
     },
 
     {
-        title: 'TOP ARTIST',
+        title: 'TOP ARTISTS',
         url: '#',
-        cName: 'nav-links'
+        cName: 'nav-links',
+        hash: '#topArtists'
     },
 
     {
         title: 'TOP GENRES',
         url: '#',
-        cName: 'nav-links'
+        cName: 'nav-links',
+        hash: '#topGenres'
     },
 
     {
         title: 'LISTENING',
         url: '#',
-        cName: 'nav-links'
+        cName: 'nav-links',
+        hash: '#listening'
     },
 
     {
