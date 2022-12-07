@@ -30,7 +30,7 @@ export default function TopGenres(){
   
     return (
       <>
-        <button onClick={getTopArtist}>Get Top Genres</button>
+        <button onClick={getTopGenres}>Get Top Genres</button>
         <br/>
         {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
       </>

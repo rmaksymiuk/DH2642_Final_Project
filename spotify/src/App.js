@@ -4,6 +4,7 @@ import './App.css';
 import LogIn from './components/LogIn/LogIn';
 import TopTrack from './components/TopTracks/TopTracks';
 import TopArtist from './components/TopArtist/TopArtist';
+import TopGenres from './components/TopGenres/TopGenres';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <LogIn />
         <TopTrack/>
         <TopArtist/>
+        <TopGenres/>
     </div>
   );
 }
