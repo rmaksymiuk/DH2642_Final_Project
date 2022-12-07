@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 const CLIENT_ID = "acb0d4e1978245188e48efd073036e0c";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL = "http://localhost:3000/";
+const REDIRECT_URL = "https://trackify-fe471.web.app/index.html";
+//Please change this URL part to https://localhost:3000 when you run it in your local server
 const SCOPES = [
   "user-top-read"
   //we need to add here what is needed to fetch api (refer to scopes section in Spotify Developer)
