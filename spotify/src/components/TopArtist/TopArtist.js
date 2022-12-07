@@ -17,7 +17,8 @@ export default function TopArtist(){
       axios
         .get(TOPARTIST_ENDPOINT, {
           headers: {
-            Authorization: "Bearer " + token,
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
           },
         })
         .then((response) => {

@@ -17,7 +17,8 @@ export default function TopGenres(){
       axios
         .get(TOPGENRES_ENDPOINT, {
           headers: {
-            Authorization: "Bearer " + token,
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json"
           },
         })
         .then((response) => {
