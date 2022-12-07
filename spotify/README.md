@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+# TRACKIFY
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+ This is a Final Project for KTH DH2642. 
 
-## Available Scripts
+## What is TRACKIFY?
 
-In the project directory, you can run:
+TRACKIFY is a website that displays the user listening data analytics. It will have users log into their Spotify accounts at first. Then, users are able to view an overview of top tracks, top artists, top genres and listening time. 
 
-### `npm start`
+## What we have done
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ - Navigation bar
+ - SignIn(authentication)
+ - Top tracks and Top artists API call
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## In-Progress
+ 
+ - SignIn(CSS work)
+ - Using Router for SPA
+ - Addressing fetched data from API call in Top Tracks and Top Artists Page
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## What we still plan to do
+ 
+ - Main Page or Profiles
+ - Top Genres Component
+ - Listening Component
+ - Overall CSS Work
+  
+## File structure of our project
+ 
+ 'spotify' is a top-level folder in our project. It contains 2 child folders, i.e., 'public' and 'src', and the 'src' folder contains a 'components' folder. 
+ In a directory '/spotify/src/components', it includes 7 folders and each of them is for one react-component. They all contain at least one '.js' file and '.css' file.
+ 
