@@ -30,7 +30,7 @@ export default function TopArtist(){
   
     return (
       <>
-        <button onClick={getTopArtist}>Get TopArtist</button>
+        <button onClick={getTopArtist}>Get Top Artist</button>
         <br/>
         {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
       </>
