@@ -1,31 +1,31 @@
 export const MenuItems = [
     {
         title: 'TOP TRACKS',
-        url: '#',
+        url: '/topTracks',
         cName: 'nav-links'
     },
 
     {
         title: 'TOP ARTIST',
-        url: '#',
+        url: '/topArtist',
         cName: 'nav-links'
     },
 
     {
         title: 'TOP GENRES',
-        url: '#',
+        url: '/topGenres',
         cName: 'nav-links'
     },
 
     {
         title: 'LISTENING',
-        url: '#',
+        url: '/listening',
         cName: 'nav-links'
     },
 
     {
         title: 'Log in',
-        url: '#',
+        url: '/login',
         cName: 'nav-links-mobile'
     }
 ]
