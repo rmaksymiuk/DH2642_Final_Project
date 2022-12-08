@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Button.css'
 
 const STYLES = [
@@ -20,7 +20,12 @@ export const Button = ({
 }) => {
     const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0]
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0]
+    const [active, setActive] = useState("");
+    function loginACB()
+    {
+        window.location.pathname = '/login'
+    }
     return (
-        <button className= {`btn ${checkButtonStyle} ${checkButtonSize} `} onClick= {onClick} type = {type}>{children}</button>
+        <button className= {`btn ${checkButtonStyle} ${checkButtonSize} `} onClick= {loginACB} type = {type}>{children}</button>
     );
 }
