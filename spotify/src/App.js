@@ -35,7 +35,7 @@ function App() {
   return (
     <div className="App">
         <Navbar />
-        <Component />
+        <Component /> 
 
     </div>
   );

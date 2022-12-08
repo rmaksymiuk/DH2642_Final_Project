@@ -39,11 +39,15 @@ export default function Login(){
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${PARAM}&response_type=token&show_dialog=true`;
   };
 
-  return (
-    <div>
-      <h1>Sign In</h1>
-      <br/>
-      <button onClick={handleLogin}>SignIn with spotify</button>
-    </div>
-  );
+  // return (
+  //   <div>
+  //     <h1>Sign In</h1>
+  //     <br/>
+  //     <button onClick={handleLogin}>SignIn with spotify</button>
+  //   </div>
+  // );
+
+  return (handleLogin());
 };
+
+

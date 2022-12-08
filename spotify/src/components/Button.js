@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import './Button.css'
+import Login from './LogIn/LogIn'
 
 const STYLES = [
     'btn--primary',
@@ -23,7 +24,11 @@ export const Button = ({
     const [active, setActive] = useState("");
     function loginACB()
     {
+        
         window.location.pathname = '/login'
+        debugger
+
+        // Login();
     }
     return (
         <button className= {`btn ${checkButtonStyle} ${checkButtonSize} `} onClick= {loginACB} type = {type}>{children}</button>
