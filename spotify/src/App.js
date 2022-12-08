@@ -7,36 +7,21 @@ import TopArtist from './components/TopArtist/TopArtist';
 import TopGenres from './components/TopGenres/TopGenres';
 import Listening from './components/Listening/Listening';
 import Login from './components/LogIn/LogIn';
+import {Route, Routes} from 'react-router-dom'
 
 function App() {
-  let Component
-  const [active, setActive]  = useState("");
 
-  switch(window.location.pathname) {
-    case "/":
-      Component = App
-      break
-    case "/topTracks":
-      Component = TopTrack
-      break
-    case "/topArtist":
-      Component = TopArtist
-      break
-    case "/topGenres":
-      Component = TopGenres
-      break
-    case "/listening":
-      Component = Listening
-      break
-    case "/login":
-      Component = Login
-      break
-  }
   return (
     <div className="App">
         <Navbar />
-        <Component /> 
-
+        <Routes>
+            <Route path="/" element={<App/>}/>
+            <Route path="/topTracks" element={<TopTrack/>}/>
+            <Route path="/topArtist" element={<TopArtist/>}/>
+            <Route path="/topGenres" element={<TopGenres/>}/>
+            <Route path="/listening" element={<Listening/>}/>
+            <Route path="/login" element={<Login/>}/>
+        </Routes>
     </div>
   );
 }

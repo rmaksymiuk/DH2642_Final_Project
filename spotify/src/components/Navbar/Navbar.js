@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { MenuItems } from './MenuItems';
 import './Navbar.css'
 import {Button} from '../Button'
+import {Link, useMatch, useResolvedPath} from 'react-router-dom'
 
 class Navbar extends React.Component {
     state = { clicked: false}
@@ -19,9 +20,9 @@ class Navbar extends React.Component {
                 <ul className={this.state.clicked ? 'nav-menu active' : 'nav-menu'}>
                     {MenuItems.map((item, index) => { 
                         return (<li key = {index}>
-                                    <a className={item.cName} href = {item.url}>
+                                    <CustomLink  className={item.cName} to ={item.url} >
                                         {item.title}
-                                    </a>
+                                    </CustomLink>
                                 </li>)
                         } )}
                 </ul>
@@ -29,6 +30,16 @@ class Navbar extends React.Component {
             </nav>
         );
     }
+}
+
+function CustomLink({to, children, ...props}){
+    const resolvedPath = useResolvedPath(to)
+    const isActive = useMatch({path: resolvedPath.pathname, end: true})
+    return(
+        <Link to = {to} {...props}>
+            {children}
+        </Link>
+    )
 }
 
 export default Navbar
