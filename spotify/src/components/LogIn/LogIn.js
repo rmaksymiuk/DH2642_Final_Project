@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-const CLIENT_ID = "acb0d4e1978245188e48efd073036e0c";
+const CLIENT_ID = "f3249000e56a4740b15910bc9611b894";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL = "https://trackify-fe471.web.app";
-//Please change this URL part to https://localhost:3000 when you run it in your local server
+const REDIRECT_URL = "http://localhost:3000";
+//Please change this URL part to http://localhost:3000 when you run it in your local server
 const SCOPES = [
   "user-top-read", "ugc-image-upload", "user-read-playback-state", "user-read-currently-playing",
   "playlist-read-private", "playlist-read-collaborative", "user-follow-read", "user-read-playback-position",
