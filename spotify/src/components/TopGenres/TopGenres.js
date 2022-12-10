@@ -16,7 +16,7 @@ export default function TopGenres(){
   
     function getTopGenres() {
       axios
-        .get(TOPGENRES_ENDPOINT, { params: { seed_artists: "4NHQUGzhtTLFvgF5SZesLK", seed_genres: "pop,rap,country", seed_tracks: "6rqhFgbbKwnb9MLmUQDhG6"} }, {
+        .get(TOPGENRES_ENDPOINT, { params: { seed_artists: "4NHQUGzhtTLFvgF5SZesLK", seed_genres: "classical,country", seed_tracks: "0c6xIDDpzE81m2q797ordA"},
             headers: {
                 "Authorization": "Bearer " + token,
                 "Content-Type": "application/json"
