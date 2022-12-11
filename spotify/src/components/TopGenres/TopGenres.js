@@ -34,7 +34,7 @@ export default function TopGenres(){
       <>
         <button onClick={getTopGenres}>Get Top Genres</button>
         <br/>
-        {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
+        {data?.tracks ? data.tracks.map((track) => <p>{track.name}</p>) : null}
       </>
     );
   };
