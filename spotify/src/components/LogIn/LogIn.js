@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-const CLIENT_ID = "f3249000e56a4740b15910bc9611b894";
+const CLIENT_ID = "bd2c44f19a704b94a9af2748fe809bf6";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URL = "http://localhost:3000";
 //Please change this URL part to http://localhost:3000 when you run it in your local server
