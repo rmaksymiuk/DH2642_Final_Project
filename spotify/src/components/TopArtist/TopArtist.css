@@ -1,0 +1,50 @@
+.title{
+    font-size: 1.7rem;
+    padding: 1rem;
+    text-align: center;
+}
+.menu{
+    /* padding: 1rem; */
+    
+}
+.tabs {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+}
+
+.tabs li{
+    border-style: solid;
+    border-radius: 10px 10px 0px 0px;
+    border-width: 1px;
+    font-size: 1.2rem;
+    width: 400px;
+    display: inline-block;
+    color: black;
+    padding: 1rem 0rem;
+    cursor: pointer;
+    text-align: center;    
+}
+
+.tabs li:hover{
+    background-color: #A3EEBD;
+    color: blue;
+}
+
+.tabs li.is_active{
+    background-color: #6FE599;
+    height: 100%;
+    border-color: black;
+}
+
+.contents.exist{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+img{
+    max-width: 100%;
+    width: auto !important;
+    height: auto !important;
+}
