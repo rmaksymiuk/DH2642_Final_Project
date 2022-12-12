@@ -12,8 +12,8 @@ export const MenuItems = [
     },
 
     {
-        title: 'TOP GENRES',
-        url: '/topGenres',
+        title: 'RECOMMENDATIONS',
+        url: '/recommendations',
         cName: 'nav-links'
     },
 
