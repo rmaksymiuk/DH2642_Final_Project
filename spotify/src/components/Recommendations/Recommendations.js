@@ -13,14 +13,17 @@ export default function TopGenres(){
     const [twoArtists, setTwoArtists] = useState({});
   
     useEffect(() => {
-      if (localStorage.getItem("accessToken")) {
-        setToken(localStorage.getItem("accessToken"));
-        getUserDataACB(localStorage.getItem("accessToken"));
-        getRecommendationsACB(localStorage.getItem("accessToken"));
+      const fetchData = async () => {
+          if (localStorage.getItem("accessToken")) {
+            setToken(localStorage.getItem("accessToken"));
+            getUserArtistsACB(localStorage.getItem("accessToken"));
+            getUserTracksACB(localStorage.getItem("accessToken"));
+            getRecommendationsACB(localStorage.getItem("accessToken"));
+          }
       }
     }, []);
 
-    function getUserDataACB(Token = token) {
+    function getUserArtistsACB(Token = token) {
         axios
             .get(TOPARTIST_ENDPOINT, { params: {limit: 2},
                 headers: {
@@ -29,13 +32,15 @@ export default function TopGenres(){
                 },
             })
             .then((response) => {
-                console.log(response.data.items);
                 setTwoArtists(response.data.items.map(getIDCB));
+                console.log(twoArtists);
                 })
             .catch((error) => {
                 console.log(error);
             });
+    }
 
+    async function getUserTracksACB(Token = token) {
         axios
             .get(TOPTRACK_ENDPOINT, { params: {limit: 3},
                 headers: {
@@ -49,8 +54,6 @@ export default function TopGenres(){
             .catch((error) => {
                 console.log(error);
             });
-
-
     }
 
     function getIDCB(element) {
@@ -59,7 +62,7 @@ export default function TopGenres(){
 
     function getRecommendationsACB(Token = token) {
         axios
-            .get(RECOMMENDATIONS_ENDPOINT, { params: { seed_artists: twoArtists, seed_tracks: threeTracks},
+            .get(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+twoArtists[0]+","+twoArtists[1]+"&seed_tracks="+threeTracks[0]+","+threeTracks[1]+","+threeTracks[2], {
                 headers: {
                     "Authorization": "Bearer " + Token,
                     "Content-Type": "application/json"
