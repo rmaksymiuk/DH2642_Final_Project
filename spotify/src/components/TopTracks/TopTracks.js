@@ -31,8 +31,9 @@ export default function TopTrack(){
   
     return (
       <>
-        <button onClick={getTopTrack}>Get TopTrack</button>
+        {getTopTrack()}
         <br/>
+        <h1>Top {data.length} Songs</h1>
         {data?.items ? data.items.map((item) => <p>{item.name}</p>) : null}
       </>
     );

@@ -7,6 +7,7 @@ import TopGenres from './components/TopGenres/TopGenres';
 import Listening from './components/Listening/Listening';
 import Login from './components/LogIn/LogIn';
 import {Route, Routes} from 'react-router-dom'
+import Main from './components/Main/Main'
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
     <div className="App">
         <Navbar />
         <Routes>
-            {/* <Route path="/" element={<App/>}/> */}
+            <Route path="*" element={<Main/>}/> 
             <Route path="/topTracks" element={<TopTrack/>}/>
             <Route path="/topArtist" element={<TopArtist/>}/>
             <Route path="/topGenres" element={<TopGenres/>}/>
