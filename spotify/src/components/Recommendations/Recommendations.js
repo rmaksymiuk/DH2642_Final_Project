@@ -15,12 +15,12 @@ export default function TopGenres(){
     useEffect(() => {
       if (localStorage.getItem("accessToken")) {
         setToken(localStorage.getItem("accessToken"));
-        getUserData(localStorage.getItem("accessToken"));
-        getRecommendations(localStorage.getItem("accessToken"));
+        getUserDataACB(localStorage.getItem("accessToken"));
+        getRecommendationsACB(localStorage.getItem("accessToken"));
       }
     }, []);
 
-    function getUserData(Token = token) {
+    function getUserDataACB(Token = token) {
         axios
             .get(TOPARTIST_ENDPOINT, { params: {limit: 2},
                 headers: {
@@ -30,7 +30,7 @@ export default function TopGenres(){
             })
             .then((response) => {
                 console.log(response.data.items);
-                setTwoArtists(response.data.items);
+                setTwoArtists(response.data.items.map(getIDCB));
                 })
             .catch((error) => {
                 console.log(error);
@@ -44,7 +44,7 @@ export default function TopGenres(){
                 },
             })
             .then((response) => {
-                setThreeTracks(response.data);
+                setThreeTracks(response.data.items.map(getIDCB));
                 })
             .catch((error) => {
                 console.log(error);
@@ -52,7 +52,12 @@ export default function TopGenres(){
 
 
     }
-    function getRecommendations(Token = token) {
+
+    function getIDCB(element) {
+        return element.id;
+    }
+
+    function getRecommendationsACB(Token = token) {
         axios
             .get(RECOMMENDATIONS_ENDPOINT, { params: { seed_artists: ["4NHQUGzhtTLFvgF5SZesLK", "06HL4z0CvFAxyc27GXpf02"], seed_tracks: "0c6xIDDpzE81m2q797ordA"},
                 headers: {
@@ -68,7 +73,8 @@ export default function TopGenres(){
         });
     };
 
-    function findDetails(track){
+
+    function findDetailsACB(track){
         return <div className="details" key={track.id}>
             <a target="_blank" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[1].url}/></a>
             <em>{track.name}</em>
@@ -79,7 +85,7 @@ export default function TopGenres(){
       <>
         <h1 className="title">{"Recommendations"}</h1>
         <br/>
-        {data?.tracks?data.tracks.map((track)=>{return findDetails(track)}):null}
+        {data?.tracks?data.tracks.map((track)=>{return findDetailsACB(track)}):null}
       </>
     );
   };
