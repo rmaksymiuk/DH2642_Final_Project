@@ -1,50 +1,79 @@
+.container {
+    display: flex;
+    flex-direction: column;    
+    align-items: center;
+}
 .title{
-    font-size: 1.7rem;
+    margin: 50px 0px 30px 0px;
+    font-size: 3rem;
     padding: 1rem;
     text-align: center;
+    white-space: nowrap;
 }
 .menu{
     /* padding: 1rem; */
-    
+    width: 100%;
+    max-width: 1000px;
+    height: 70px;
 }
 .tabs {
     display: flex;
-    justify-content: center;
-    height: 50px;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 0px 0px 12px 0px;
+    height: 100%;
+    
 }
 
 .tabs li{
-    border-style: solid;
-    border-radius: 10px 10px 0px 0px;
-    border-width: 1px;
-    font-size: 1.2rem;
-    width: 400px;
+    height: 100%;
+    width: 100%;
+    font-size: 1.6rem;
+    max-width: 400px;
+    padding-bottom: 10px;
+    white-space:nowrap;
     display: inline-block;
     color: black;
-    padding: 1rem 0rem;
+    padding: 1rem 1rem;
     cursor: pointer;
     text-align: center;    
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color:gray;
 }
 
 .tabs li:hover{
-    background-color: #A3EEBD;
+    border-bottom: #6FE599;
     color: blue;
 }
 
 .tabs li.is_active{
-    background-color: #6FE599;
-    height: 100%;
-    border-color: black;
+    /*background-color: #6FE599;*/
+    border-bottom: solid;
+    border-bottom-color: #6FE599;
+    border-bottom-width: 5px;
 }
 
-.contents.exist{
-    width: 100%;
+.contents{
+    padding: 20px 40px;   
+    max-width: 1200px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }
 
+.details{
+    margin: 10px 10px;
+}
 img{
     max-width: 100%;
+    max-height: 100%;
     width: auto !important;
     height: auto !important;
+}
+
+.artist{
+    font-size: 1.3rem;
+    text-align: center;
+    white-space: nowrap;
 }
