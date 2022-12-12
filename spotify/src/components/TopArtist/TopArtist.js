@@ -13,14 +13,14 @@ export default function TopArtist(){
     useEffect(() => {
       if (localStorage.getItem("accessToken")) {
         setToken(localStorage.getItem("accessToken"));
+        getTopArtist(0, localStorage.getItem("accessToken"));
       };
     }, []);
-
-    function getTopArtist(idx) {
+    function getTopArtist(idx, Token=token) {
       axios
         .get(TOPARTIST_ENDPOINT+"?time_range="+timeRange[idx]+"&limit=20", {
           headers: {
-            "Authorization": "Bearer " + token,
+            "Authorization": "Bearer " + Token,
             "Content-Type": "application/json"
           },
         })
@@ -38,13 +38,13 @@ export default function TopArtist(){
     }
 
     function findDetails(idx, item){
-      return <div key={item.id}>
+      return <div className="details" key={item.id}>
                 <a target="_blank" href={item.external_urls.spotify}><img src={item.images[1].url}/></a>
-                <div>{(idx+1)+". "+item.name}</div> 
+                <div className="artist">{(idx+1)+". "+item.name}</div> 
               </div>
-    }
-
-;    return (
+    };
+    
+    return (
       <>
         <div className="container">
           <h1 className="title">{"Top Artists ("+tabArr[index]+")"}</h1>
@@ -55,7 +55,7 @@ export default function TopArtist(){
                 <li className={index===2?'is_active':''} onClick={()=>{changeClick(2)}}>{tabArr[2]}</li>
             </ul>
           </div>
-          <div className="contents exist">
+          <div className="contents">
             {data?.items?data.items.map((item, index)=>{return findDetails(index, item)}):null}
           </div>
         </div>
