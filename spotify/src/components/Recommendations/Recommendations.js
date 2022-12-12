@@ -59,7 +59,7 @@ export default function TopGenres(){
 
     function getRecommendationsACB(Token = token) {
         axios
-            .get(RECOMMENDATIONS_ENDPOINT, { params: { seed_artists: ["4NHQUGzhtTLFvgF5SZesLK", "06HL4z0CvFAxyc27GXpf02"], seed_tracks: "0c6xIDDpzE81m2q797ordA"},
+            .get(RECOMMENDATIONS_ENDPOINT, { params: { seed_artists: twoArtists, seed_tracks: threeTracks},
                 headers: {
                     "Authorization": "Bearer " + Token,
                     "Content-Type": "application/json"
