@@ -16,6 +16,7 @@ export default function TopArtist(){
         getTopArtist(0, localStorage.getItem("accessToken"));
       };
     }, []);
+
     function getTopArtist(idx, Token=token) {
       axios
         .get(TOPARTIST_ENDPOINT+"?time_range="+timeRange[idx]+"&limit=20", {
@@ -39,7 +40,7 @@ export default function TopArtist(){
 
     function findDetails(idx, item){
       return <div className="details" key={item.id}>
-                <a target="_blank" href={item.external_urls.spotify}><img src={item.images[1].url}/></a>
+                <a target="_blank" rel="noreferrer" href={item.external_urls.spotify}><img src={item.images[1].url} alt={"Image of "+item.name}/></a>
                 <div className="artist">{(idx+1)+". "+item.name}</div> 
               </div>
     };
@@ -56,7 +57,7 @@ export default function TopArtist(){
             </ul>
           </div>
           <div className="contents">
-            {data?.items?data.items.map((item, index)=>{return findDetails(index, item)}):null}
+            {data?.items?data.items.map((item, index)=>{return findDetails(index, item)}):<div className="message">"You do not have sufficient play records."</div>}
           </div>
         </div>
       </>
