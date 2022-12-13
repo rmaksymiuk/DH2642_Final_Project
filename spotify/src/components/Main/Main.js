@@ -36,13 +36,13 @@ export default function Main(){
       <div className="container">
         <div className="profiles">
             <div className="animate__animated animate__pulse animate__slower animate__infinite">
-                {token? 
+                {token&&(data?.display_name)? 
                     <div className="message">{"HI! "+ (data.display_name?data.display_name:"")}</div>
                     :<div className="message">Welcome to Trackify!</div>}
             </div>
             {token&&(data?.images)? 
                 <a target="_blank" rel="noreferrer" href={data.external_urls.spotify}><img className="user" src={data.images[0].url} alt="User Profile"/></a>
-                :<img className="logo" src={img} alt="trackify logo"/>}
+                :<img className="logo" src={img} alt="spotify logo"/>}
       </div>
     </div>
     );
