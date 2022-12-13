@@ -16,11 +16,12 @@ export default function TopGenres(){
       const fetchData = async () => {
           if (localStorage.getItem("accessToken")) {
             setToken(localStorage.getItem("accessToken"));
-            getUserArtistsACB(localStorage.getItem("accessToken"));
-            getUserTracksACB(localStorage.getItem("accessToken"));
-            getRecommendationsACB(localStorage.getItem("accessToken"));
+            await getUserArtistsACB(localStorage.getItem("accessToken"));
+            await getUserTracksACB(localStorage.getItem("accessToken"));
+            await getRecommendationsACB(localStorage.getItem("accessToken"));
           }
       }
+      fetchData();
     }, []);
 
     function getUserArtistsACB(Token = token) {
@@ -33,7 +34,6 @@ export default function TopGenres(){
             })
             .then((response) => {
                 setTwoArtists(response.data.items.map(getIDCB));
-                console.log(twoArtists);
                 })
             .catch((error) => {
                 console.log(error);
