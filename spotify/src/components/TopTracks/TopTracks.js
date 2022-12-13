@@ -10,7 +10,6 @@ export default function TopTrack(){
     useEffect(() => {
       if (localStorage.getItem("accessToken")) {
         setToken(localStorage.getItem("accessToken"));
-          
       }
   
     }, []);
