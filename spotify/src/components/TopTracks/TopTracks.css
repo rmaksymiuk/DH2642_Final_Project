@@ -11,6 +11,12 @@
     white-space: nowrap;
 }
 
+.menu{
+    /* padding: 1rem; */
+    width: 100%;
+    max-width: 1000px;
+    height: 70px;
+}
 .tabs {
     display: flex;
     flex-direction: row;
@@ -18,4 +24,77 @@
     margin: 0px 0px 12px 0px;
     height: 100%;
     
+}
+
+.tabs li{
+    height: 100%;
+    width: 100%;
+    font-size: 1.6rem;
+    max-width: 400px;
+    padding-bottom: 10px;
+    white-space:nowrap;
+    display: inline-block;
+    color: black;
+    padding: 1rem 1rem;
+    cursor: pointer;
+    text-align: center;    
+    border-top: solid;
+    border-bottom: solid;
+    border-width: 1px;
+    border-color:gray;
+}
+
+.tabs li:hover{
+    border-bottom: #6FE599;
+    color: blue;
+}
+
+.tabs li.is_active{
+    border-bottom: solid;
+    border-bottom-color: #6FE599;
+    border-bottom-width: 5px;
+}
+
+.tableDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tableStyle {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+}
+
+
+.tableStyle thead tr {
+    background-color: #1DB954;
+    color: #ffffff;
+    text-align: center;
+}
+
+
+.tableStyle th,
+.tableStyle td {
+    padding: 12px 15px;
+    margin: 10px 10px;
+    text-align: left;
+ 
+
+}
+
+.tableStyle tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.tableStyle tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.tableStyle tbody tr:last-of-type {
+    border-bottom: 2px solid #1DB954;
 }
