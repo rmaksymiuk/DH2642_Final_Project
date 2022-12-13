@@ -6,8 +6,6 @@ const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
 
 export default function Recommendations(props){
     const [data, setData] = useState({});
-    const [artists, setArtists] = React.useState(props.artists);
-    const [tracks, setTracks] = React.useState(props.tracks);
     const [token, setToken] = useState("");
     useEffect(() => {
       const fetchData = async () => {
@@ -19,7 +17,6 @@ export default function Recommendations(props){
       fetchData();
     }, []);
 
-
     function getRecommendationsACB(Token = token, artists, tracks) {
         axios
             .get(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+artists[0]+","+artists[1]+"&seed_tracks="+tracks[0]+","+tracks[1]+","+tracks[2], {
@@ -30,18 +27,18 @@ export default function Recommendations(props){
             })
         .then((response) => {
           setData(response.data);
-          console.log("got reccomendation");
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     };
 
-
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
-            <a target="_blank" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[1].url}/></a>
-            <em>{track.name}</em>
+            <a target="_blank" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[2].url}/></a>
+            <em class = "trackName">{track.name}</em>
+            <em>{track.artists[0].name}</em>
             </div>
     };
   
