@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './Main.css';
+import img from "./spotify logo.png";
+
 const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
 
 export default function Main(){
@@ -30,15 +32,18 @@ export default function Main(){
           });
       };
   
-  
     return (
-      <>
+      <div className="container">
         <div className="profiles">
-            <div className="message">{"HI! "+ (data.display_name?data.display_name:"")}</div>
-            {data?.images? <img className="user" src={data.images[0].url}/>:null}
-            {console.log(data)}
-        </div>
-      </>
+            <div className="animate__animated animate__pulse animate__slower animate__infinite">
+                {token&&(data?.display_name)? 
+                    <div className="message">{"HI! "+ (data.display_name?data.display_name:"")}</div>
+                    :<div className="message">Welcome to Trackify!</div>}
+            </div>
+            {token&&(data?.images)? 
+                <a target="_blank" rel="noreferrer" href={data.external_urls.spotify}><img className="user" src={data.images[0].url} alt="User Profile"/></a>
+                :<img className="logo" src={img} alt="spotify logo"/>}
+      </div>
+    </div>
     );
-  };
-  
+};

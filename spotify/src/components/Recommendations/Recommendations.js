@@ -3,66 +3,23 @@ import axios from "axios";
 import "./Recommendations.css"
 
 const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
-const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
-const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 
-export default function TopGenres(){
-    const [token, setToken] = useState("");
+export default function Recommendations(props){
     const [data, setData] = useState({});
-    const [threeTracks, setThreeTracks] = useState({});
-    const [twoArtists, setTwoArtists] = useState({});
-  
+    const [token, setToken] = useState("");
     useEffect(() => {
       const fetchData = async () => {
           if (localStorage.getItem("accessToken")) {
             setToken(localStorage.getItem("accessToken"));
-            getUserArtistsACB(localStorage.getItem("accessToken"));
-            getUserTracksACB(localStorage.getItem("accessToken"));
-            getRecommendationsACB(localStorage.getItem("accessToken"));
+            getRecommendationsACB(localStorage.getItem("accessToken"), props.artists, props.tracks);
           }
       }
+      fetchData();
     }, []);
 
-    function getUserArtistsACB(Token = token) {
+    function getRecommendationsACB(Token = token, artists, tracks) {
         axios
-            .get(TOPARTIST_ENDPOINT, { params: {limit: 2},
-                headers: {
-                    "Authorization": "Bearer " + Token,
-                    "Content-Type": "application/json"
-                },
-            })
-            .then((response) => {
-                setTwoArtists(response.data.items.map(getIDCB));
-                console.log(twoArtists);
-                })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
-    async function getUserTracksACB(Token = token) {
-        axios
-            .get(TOPTRACK_ENDPOINT, { params: {limit: 3},
-                headers: {
-                    "Authorization": "Bearer " + Token,
-                    "Content-Type": "application/json"
-                },
-            })
-            .then((response) => {
-                setThreeTracks(response.data.items.map(getIDCB));
-                })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
-
-    function getIDCB(element) {
-        return element.id;
-    }
-
-    function getRecommendationsACB(Token = token) {
-        axios
-            .get(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+twoArtists[0]+","+twoArtists[1]+"&seed_tracks="+threeTracks[0]+","+threeTracks[1]+","+threeTracks[2], {
+            .get(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+artists[0]+","+artists[1]+"&seed_tracks="+tracks[0]+","+tracks[1]+","+tracks[2], {
                 headers: {
                     "Authorization": "Bearer " + Token,
                     "Content-Type": "application/json"
@@ -70,17 +27,18 @@ export default function TopGenres(){
             })
         .then((response) => {
           setData(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
         });
     };
 
-
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
-            <a target="_blank" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[1].url}/></a>
-            <em>{track.name}</em>
+            <a target="_blank" rel="noreferrer" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[2].url} alt="album"/></a>
+            <em class = "trackName">{track.name}</em>
+            <em>{track.artists[0].name}</em>
             </div>
     };
   
