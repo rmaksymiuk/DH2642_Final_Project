@@ -36,7 +36,7 @@ export default function Recommendations(props){
 
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
-            <a target="_blank" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[2].url}/></a>
+            <a target="_blank" rel="noreferrer" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[2].url} alt="album"/></a>
             <em class = "trackName">{track.name}</em>
             <em>{track.artists[0].name}</em>
             </div>
