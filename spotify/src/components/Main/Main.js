@@ -32,7 +32,6 @@ export default function Main(){
             console.log(error);
           });
       };
-      console.log(data);
     return (
       <div className="container">
         <div className="profiles">

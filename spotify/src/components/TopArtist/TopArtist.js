@@ -16,7 +16,6 @@ export default function TopArtist(){
         getTopArtist(0, localStorage.getItem("accessToken"));
       };
     }, []);
-
     function getTopArtist(idx, Token=token) {
       axios
         .get(TOPARTIST_ENDPOINT+"?time_range="+timeRange[idx]+"&limit=20", {
@@ -56,9 +55,11 @@ export default function TopArtist(){
                 <li className={index===2?'is_active':''} onClick={()=>{changeClick(2)}}>{tabArr[2]}</li>
             </ul>
           </div>
-          <div className="contents">
-            {data?.items?data.items.map((item, index)=>{return findDetails(index, item)}):<div className="message">"You do not have sufficient play records."</div>}
+          {data?.total
+          ?<div className="contents">
+            {data.items.map((item, index)=>{return findDetails(index, item)})}
           </div>
+          :<div className="message">"You do not have sufficient play records."</div>}
         </div>
       </>
     );

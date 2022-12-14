@@ -58,7 +58,6 @@ export default function TopTrack(){
     function tableCounter(number){
       <td>{number}</td>
     }
-
    const size = Array.from({length: 20 }, (_, i) => i + 1)
 
     return (
@@ -73,6 +72,7 @@ export default function TopTrack(){
               </ul>
           </div>
         </div>
+        {data?.total?
         <div className="tableDiv">
           <table className="tableStyle">
             <thead>
@@ -90,6 +90,7 @@ export default function TopTrack(){
             </tbody>
           </table>
         </div>
+        :<div className="text">"You do not have sufficient play records"</div>}
       </>
     );
   };
