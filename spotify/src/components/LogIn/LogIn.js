@@ -47,7 +47,7 @@ export default function Login(){
   return (
     <div className="login">
       <div className="text">{localStorage.getItem('accessToken')?"LogIn Successful":"If you want to use our services, please press the below 'Sign In' button"}</div>
-      {localStorage.getItem('accessToken')?<button className="signIn" onClick={handleLogin}>Sign In</button>:null}
+      {!localStorage.getItem('accessToken')?<button className="signIn" onClick={handleLogin}>Sign In</button>:null}
     </div>
   );
 };
