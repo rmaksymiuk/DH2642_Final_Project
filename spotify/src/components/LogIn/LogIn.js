@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-const CLIENT_ID = "bd2c44f19a704b94a9af2748fe809bf6";
+import React, { useState, useEffect } from "react";
+const CLIENT_ID = "f3249000e56a4740b15910bc9611b894";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL = "http://localhost:3000";
+const REDIRECT_URL = "http://localhost:3000/login";
 //Please change this URL part to http://localhost:3000 when you run it in your local server
 const SCOPES = [
   "user-top-read", "ugc-image-upload", "user-read-playback-state", "user-read-currently-playing",
@@ -22,7 +22,12 @@ const splitCurrentHash = (hash) => {
 };
 
 export default function Login(){
+  const [,reRender]= useState("");
   useEffect(() => {
+    if (localStorage.getItem('accessToken')){
+      window.location='/';
+      return;
+    }
     if (window.location.hash) {
       const { access_token, expires_in, token_type } =
         splitCurrentHash(window.location.hash);
@@ -31,7 +36,7 @@ export default function Login(){
       localStorage.setItem("accessToken", access_token);
       localStorage.setItem("tokenType", token_type);
       localStorage.setItem("expiresIn", expires_in);
-      
+      reRender();
     }
   });
 
@@ -39,7 +44,12 @@ export default function Login(){
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${PARAM}&response_type=token&show_dialog=true`;
   };
 
-  return (handleLogin());
+  return (
+    <div className="login">
+      <div className="text">{localStorage.getItem('accessToken')?"LogIn Successful":"If you want to use our services, please press the below 'Sign In' button"}</div>
+      {localStorage.getItem('accessToken')?<button className="signIn" onClick={handleLogin}>Sign In</button>:null}
+    </div>
+  );
 };
 
 

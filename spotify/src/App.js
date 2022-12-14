@@ -16,7 +16,7 @@ function App() {
     <div className="App">
         <Navbar />
         <Routes>
-            {/* <Route path="*" element={<Main/>}/>  */}
+            <Route path="*" element={<Main/>}/>
             <Route path="/topTracks" element={<TopTrack/>}/>
             <Route path="/topArtist" element={<TopArtist/>}/>
             <Route path="/recommendations" element={<Recommendations artists = {["06HL4z0CvFAxyc27GXpf02","09hVIj6vWgoCDtT03h8ZCa"]} tracks = {["0c6xIDDpzE81m2q797ordA","0c6xIDDpzE81m2q797ordA","0c6xIDDpzE81m2q797ordA"]}/>}/>
