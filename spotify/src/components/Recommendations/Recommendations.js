@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Recommendations.css"
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 
 const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
 
@@ -36,9 +41,15 @@ export default function Recommendations(props){
 
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
-            <a target="_blank" rel="noreferrer" href={track.external_urls.spotify}><img className="albumImg" src={track.album.images[2].url} alt="album"/></a>
-            <em class = "trackName">{track.name}</em>
-            <em>{track.artists[0].name}</em>
+        <a target="_blank" href={track.external_urls.spotify}>
+              <ListItem>
+                <ListItemAvatar>
+                  <Avatar src = {track.album.images[2].url} />
+                </ListItemAvatar>
+                <ListItemText primary={track.name} />
+                <ListItemText primary={track.artists[0].name} />
+              </ListItem>
+        </a>
             </div>
     };
   
@@ -47,6 +58,9 @@ export default function Recommendations(props){
         <h1 className="title">{"Recommendations"}</h1>
         <br/>
         {data?.tracks?data.tracks.map((track)=>{return findDetailsACB(track)}):null}
+    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+
+    </List>
       </>
     );
   };
