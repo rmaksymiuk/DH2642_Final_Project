@@ -43,11 +43,11 @@ export default function Recommendations(props){
         return <div className="details" key={track.id}>
         <a target="_blank" href={track.external_urls.spotify}>
               <ListItem>
-                <ListItemAvatar>
+                <ListItemAvatar style={{display:'flex', justifyContent:'flex-end'}}>
                   <Avatar src = {track.album.images[2].url} />
                 </ListItemAvatar>
-                <ListItemText primary={track.name} />
-                <ListItemText primary={track.artists[0].name} />
+                <ListItemText class = "ListItem" primary={track.name}/>
+                <ListItemText class = "ListItem" primary={track.artists[0].name}/>
               </ListItem>
         </a>
             </div>
@@ -57,9 +57,8 @@ export default function Recommendations(props){
       <>
         <h1 className="title">{"Recommendations"}</h1>
         <br/>
+    <List sx={{maxWidth: 800, width: '100%', bgcolor: 'background.paper'}}>
         {data?.tracks?data.tracks.map((track)=>{return findDetailsACB(track)}):null}
-    <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-
     </List>
       </>
     );
