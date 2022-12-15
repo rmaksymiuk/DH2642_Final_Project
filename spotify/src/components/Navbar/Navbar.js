@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { MenuItems } from './MenuItems';
 import './Navbar.css'
-import {Button} from '../Button'
+import Button from '@mui/material/Button';
 import {Link, useMatch, useResolvedPath} from 'react-router-dom'
 
 class Navbar extends React.Component {
@@ -37,11 +37,20 @@ class Navbar extends React.Component {
                         })
                     }
                 </ul>
-                {localStorage.getItem('accessToken')?<Button>Log Out</Button>:<Button>Log In</Button>}
+                {localStorage.getItem('accessToken')?<Button onClick= {logoutACB} size="small" variant="contained">Log Out</Button>:<Button onClick = {loginACB} size="small" variant="contained">Log In</Button>}
             </nav>
         );
 }
 }
+
+function loginACB() {
+    window.location.pathname = '/login'
+}
+
+function logoutACB(){
+    window.location='/logout'
+}
+
 function CustomLink({to, children, ...props}){
     const resolvedPath = useResolvedPath(to)
     const isActive = useMatch({path: resolvedPath.pathname, end: true})
