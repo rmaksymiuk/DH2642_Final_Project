@@ -37,7 +37,7 @@ class Navbar extends React.Component {
                         })
                     }
                 </ul>
-                <Button>Log in</Button>
+                {localStorage.getItem('accessToken')?<Button>Log Out</Button>:<Button>Log In</Button>}
             </nav>
         );
 }

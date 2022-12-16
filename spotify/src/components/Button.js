@@ -26,7 +26,10 @@ export const Button = ({
     {
         window.location.pathname = '/login'
     }
+    function logoutACB(){
+        window.location='/logout'
+    }
     return (
-        <button className= {`btn ${checkButtonStyle} ${checkButtonSize} `} onClick= {loginACB} type = {type}>{children}</button>
+        <button className= {`btn ${checkButtonStyle} ${checkButtonSize} `} onClick= {children==="Log Out"?logoutACB:loginACB} type = {type}>{children}</button>
     );
 }
