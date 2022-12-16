@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import { MenuItems } from './MenuItems';
 import './Navbar.css'
 import Button from '@mui/material/Button';
-import {Link, useMatch, useResolvedPath} from 'react-router-dom'
+import {Link, useMatch, useResolvedPath} from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import {Theme} from "../../Theme.js"
 
 class Navbar extends React.Component {
     state = {clicked: false}
@@ -37,7 +39,9 @@ class Navbar extends React.Component {
                         })
                     }
                 </ul>
-                {localStorage.getItem('accessToken')?<Button onClick= {logoutACB} size="small" variant="contained">Log Out</Button>:<Button onClick = {loginACB} size="small" variant="contained">Log In</Button>}
+                <ThemeProvider theme={Theme}>
+                    {localStorage.getItem('accessToken')?<Button color="success" onClick= {logoutACB} size="small" variant="contained">Log Out</Button>:<Button color="success" onClick = {loginACB} size="small" variant="contained">Log In</Button>}
+                </ThemeProvider>
             </nav>
         );
 }

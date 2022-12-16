@@ -4,6 +4,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
+import { ThemeProvider } from '@mui/material/styles';
+import {Theme} from "../../Theme.js"
 
 export default function RecommendationsView(props) {
     function findDetailsACB(track){
@@ -24,9 +26,11 @@ export default function RecommendationsView(props) {
       <>
         <h1 className="title">{"Recommendations"}</h1>
         <br/>
-    <List sx={{maxWidth: 800, width: '100%', bgcolor: 'background.paper'}}>
-        {props.data?.tracks?props.data.tracks.map((track)=>{return findDetailsACB(track)}):null}
-    </List>
+        <ThemeProvider theme={Theme}>
+            <List sx={{maxWidth: 800, width: '100%', bgcolor: 'background.paper'}}>
+                {props.data?.tracks?props.data.tracks.map((track)=>{return findDetailsACB(track)}):null}
+            </List>
+        </ThemeProvider>
       </>
     );
 }
