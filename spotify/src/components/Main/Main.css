@@ -13,6 +13,7 @@
 
 .message{
     font-size: 2.5rem;
+    font-weight: bold;
     margin-top: 50px;
     margin-bottom: 40px;
     white-space: nowrap;
@@ -30,4 +31,29 @@
     width: 300px !important;
     height: 300px !important;
     margin-top: 20px;
+}
+
+.explain{
+    width: 1000px;
+    margin: 0px 100px;
+    background-color: lightgrey;
+    border-radius: 10px;
+    padding: 20px;
+    font-weight: bold;
+    flex-direction: column;
+}
+
+.att{
+    font-weight: bold !important;
+    color: red !important;
+    font-size: 18px;
+}
+.account{
+    margin: 10px;
+    background-color: azure;
+    text-align: center;
+    border-radius: 10px;
+}
+.my{
+    color: green;
 }

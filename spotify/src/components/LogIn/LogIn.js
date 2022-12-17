@@ -12,7 +12,7 @@ const SCOPES = [
 ];
 const PARAM = SCOPES.join("%20");
 
-const splitCurrentHash = (hash) => {
+const splitCurrentHashCB = (hash) => {
   const hashstr = hash.substring(1);
   const params = hashstr.split("&");
   return params.reduce((accumul, curval) => {
@@ -31,7 +31,7 @@ export default function Login(){
     }
     if (window.location.hash) {
       const { access_token, expires_in, token_type } =
-        splitCurrentHash(window.location.hash);
+        splitCurrentHashCB(window.location.hash);
 
       localStorage.clear();
       localStorage.setItem("accessToken", access_token);
