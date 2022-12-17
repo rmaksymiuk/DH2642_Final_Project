@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import './LogIn.css';
 const CLIENT_ID = "f3249000e56a4740b15910bc9611b894";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URL = "http://localhost:3000/login";
@@ -40,15 +41,29 @@ export default function Login(){
     }
   });
 
-  const handleLogin = () => {
+  function handleLoginACB() {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${PARAM}&response_type=token&show_dialog=true`;
   };
 
+  function backACB(){
+    window.location='/';
+  }
+
   return (
-    <div className="login">
-      <div className="text">{localStorage.getItem('accessToken')?"LogIn Successful":"If you want to use our services, please press the below 'Sign In' button"}</div>
-      {!localStorage.getItem('accessToken')?<button className="signIn" onClick={handleLogin}>Sign In</button>:null}
-    </div>
+    <div className="contin">
+      <div className="cont">
+        <div className="text">{localStorage.getItem('accessToken')
+          ?"LogIn Successful"
+          :"If you want to use our services, please press the 'Log In' button"}</div>
+        {!localStorage.getItem('accessToken')
+          ?<div className="btns">
+            <button className="inbt" onClick={handleLoginACB}>Log In</button>
+            <button className="inbt" onClick={backACB}>Go to the Main</button>
+          </div>
+          :null}
+        </div>
+      </div>
+
   );
 };
 

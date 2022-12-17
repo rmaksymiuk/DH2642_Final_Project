@@ -1,14 +1,22 @@
+import './Logout.css';
+
 export default function Logout(){
-    function handleLogOut(){
+    function handleLogOutACB(){
         localStorage.clear();
     }
-
+    function returnHomeACB(){
+        window.location='/';
+    }
     return (
-        <div>
-            <div className="byemessage">You want to log out?</div>
+        <div className="contcont">
+        <div className="cont">
+            <div className="byemessage">Do you want to log out?</div>
             <div className="signout">
-                <a href="http://localhost:3000"><button onClick={handleLogOut}>signOut</button></a>
+                <a href="http://localhost:3000"><button className="bt" onClick={handleLogOutACB}>Log Out</button></a>
+                <button className="bt" onClick={returnHomeACB}>Go Back To Home</button>
             </div>
         </div>
+        </div>
+      
     )
 }
