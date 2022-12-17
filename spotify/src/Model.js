@@ -1,6 +1,9 @@
 class Model {
     constructor() {
-        this.artists = setTopArtists();
-        this.tracks = setTopTracks();
+        this.token = setToken();
+    }
+
+    setToken() {
+        this.token = localStorage.getItem("accessToken");
     }
 }

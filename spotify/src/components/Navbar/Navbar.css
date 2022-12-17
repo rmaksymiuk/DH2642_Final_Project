@@ -131,9 +131,9 @@
         transition: 250ms;
     }
 
-    Button{
-        display: none;
-    } 
+    .palette.success{
+
+    }
 
 
 }

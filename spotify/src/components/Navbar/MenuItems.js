@@ -6,7 +6,7 @@ export const MenuItems = [
     },
 
     {
-        title: 'TOP ARTIST',
+        title: 'TOP ARTISTS',
         url: '/topArtist',
         cName: 'nav-links'
     },
