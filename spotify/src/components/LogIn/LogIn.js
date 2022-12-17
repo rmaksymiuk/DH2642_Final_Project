@@ -54,7 +54,7 @@ export default function Login(){
       <div className="cont">
         <div className="text">{localStorage.getItem('accessToken')
           ?"LogIn Successful"
-          :"If you want to use our services, please press the 'Log In' button"}</div>
+          :"Do you want to use our service?"}</div>
         {!localStorage.getItem('accessToken')
           ?<div className="btns">
             <button className="inbt" onClick={handleLoginACB}>Log In</button>

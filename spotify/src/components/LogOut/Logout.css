@@ -17,9 +17,10 @@
 }
 
 .byemessage{
-    font-size: 50px !important;
+    font-size: 40px !important;
     margin: 20px 0px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .signout{
@@ -29,8 +30,8 @@
 }
 
 .bt{
-    font-size: 20px;
-    width: 170px;
+    font-size: 18px;
+    width: 200px;
     height: 30px;
     margin: 20px;
     border-radius: 8px;
