@@ -16,15 +16,15 @@ We then have a main App.js file, which is our main landing page. The application
 
 ## How to set up the project
 
- 1. [optional] Go to Spotify dashboard https://developer.spotify.com/dashboard and sign in with your account. Then, create an app and click the 'Edit Settings' button. Add 'http://localhost:3000' to 'Website' and 'http://localhost:3000/login' to 'Redirect URIs'. Go to spotify/src/components/LogIn/LogIn.js file and set CLIENT_ID to your spotify app id.  
+1. [optional] Go to Spotify dashboard https://developer.spotify.com/dashboard and sign in with your account. Then, create an app and click the 'Edit Settings' button. Add 'http://localhost:3000' to 'Website' and 'http://localhost:3000/login' to 'Redirect URIs'. Go to spotify/src/components/LogIn/LogIn.js file and set CLIENT_ID to your spotify app id.  
 
- 2. In spotify/src/components/LogIn/LogIn.js file, you need to set REDIRECT_URL to 'http://localhost:3000/login'. Also for the spotify/src/components/LogOut/Logout.js file, you need to set the href of <a> tag to 'http://localhost:3000' 
+2. In spotify/src/components/LogIn/LogIn.js file, you need to set REDIRECT_URL to 'http://localhost:3000/login'. Also for the spotify/src/components/LogOut/Logout.js file, you need to set the href of <a> tag to 'http://localhost:3000' 
 
- 3. Now all the basic settings are done. Go to the /spotify directory and enter 'npm install' in a console. It will help you install all the necessary packages needed for our project.
+3. Now all the basic settings are done. Go to the /spotify directory and enter 'npm install' in a console. It will help you install all the necessary packages needed for our project.
 
- 4. After all the necessary packages are installed, enter 'npm start' in a console. Perfect! You can now see that our project is running in your local server.
+4. After all the necessary packages are installed, enter 'npm start' in a console. Perfect! You can now see that our project is running in your local server.
  
- 5. [Optional] If you want to deploy our app, you need to change all the urls we have set to your deployed version link. For example, if your deployed version link is 'https://www.example.com', then you need to set the link 'https://www.example.com/login' in step 2 and 'https://www.example.com' step 3. If you created your own app in step 1, you need to set 'https://www.example.com' to 'Website' and 'https:/www.localhost:3000/login' to 'REDIRECT URIs'. 
+5. [Optional] If you want to deploy our app, you need to change all the urls we have set to your deployed version link. For example, if your deployed version link is 'https://www.example.com', then you need to set the link 'https://www.example.com/login' in step 2 and 'https://www.example.com' step 3. If you created your own app in step 1, you need to set 'https://www.example.com' to 'Website' and 'https:/www.localhost:3000/login' to 'REDIRECT URIs'. 
 
 ## API Info
 
@@ -33,19 +33,19 @@ We then have a main App.js file, which is our main landing page. The application
 
 ## Functions of 'Trackify'
 
- - Sign In
+ ### Sign In
  It has sign-in function using OAuth access token. Window hash is parsed at first, and access token, token type and valid time will be stored in local storage when you log in.  
 
- - Sign out
+ ### Sign out
  When the user click the sign-out button, stored information such as access token, token type and valid time will be deleted from the local storage.
 
-- Top Tracks/Top Artists
+### Top Tracks/Top Artists
  Based on your account's play records, it shows your top tracks and top artists. There are three tabs in each page and you can set the time range. The default is 'last 4 week'. If you click the image of each playlist, it will open spotify page and you can enjoy it.
 
-- Recommendations 
+### Recommendations 
  It recommends you the songs. When you click the image or the name or each song, it will also lead to the spotify page and you can enjoy it.
 
-- Listening
+### Listening
 
 
 ## Copyright
