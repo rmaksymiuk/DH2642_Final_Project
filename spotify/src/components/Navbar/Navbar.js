@@ -35,7 +35,14 @@ class Navbar extends React.Component {
                             <CustomLink  className={item.cName} to ="/login" >
                                 {item.title}
                             </CustomLink>
-                        </li>)
+
+                            {/* <CustomLink  className={item.cName} to ="/logout" >
+                                {item.title}
+                            </CustomLink> */}
+                        </li>
+
+                        )
+                        
                         })
                     }
                 </ul>
