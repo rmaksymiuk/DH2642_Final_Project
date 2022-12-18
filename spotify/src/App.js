@@ -10,25 +10,22 @@ import {Route, Routes} from 'react-router-dom'
 import Main from './components/Main/Main'
 import axios from "axios";
 import Logout from './components/LogOut/Logout';
-import { ThemeProvider } from '@mui/material/styles';
-import {Theme} from "./Theme.js"
+import Model from "./Model.js"
 
 function App() {
-
+  const model = new Model();
   return (
     <div className="App">
-    <ThemeProvider theme={Theme}>
         <Navbar />
         <Routes>
             <Route path="*" element={<Main/>}/>
-            <Route path="/topTracks" element={<TopTrack/>}/>
-            <Route path="/topArtist" element={<TopArtist/>}/>
-            <Route path="/recommendations" element={<Recommendations token = {localStorage.getItem("accessToken")} artists = {["06HL4z0CvFAxyc27GXpf02","09hVIj6vWgoCDtT03h8ZCa"]} tracks = {["0c6xIDDpzE81m2q797ordA","0c6xIDDpzE81m2q797ordA","0c6xIDDpzE81m2q797ordA"]}/>}/>
-            <Route path="/listening" element={<Listening/>}/>
+            <Route path="/topTracks" element={<TopTrack model = {model}/>}/>
+            <Route path="/topArtist" element={<TopArtist model = {model}/>}/>
+            <Route path="/recommendations" element={<Recommendations model = {model} token = {localStorage.getItem("accessToken")} artists = {["06HL4z0CvFAxyc27GXpf02","09hVIj6vWgoCDtT03h8ZCa"]} tracks = {["0c6xIDDpzE81m2q797ordA","0c6xIDDpzE81m2q797ordA","0c6xIDDpzE81m2q797ordA"]}/>}/>
+            <Route path="/listening" element={<Listening model = {model}/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
         </Routes>
-    </ThemeProvider>
     </div>
   );
 }
