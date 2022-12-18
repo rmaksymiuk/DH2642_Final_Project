@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import Navbar from "./components/Navbar/Navbar"
 import './App.css';
-import TopTrack from './components/TopTracks/TopTracks';
+import TopTrack from './components/TopTracks/TopTracksPresenter';
 import TopArtist from './components/TopArtist/TopArtistPresenter';
 import Recommendations from './components/Recommendations/RecommendationsPresenter';
 import Listening from './components/Listening/Listening';
