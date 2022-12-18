@@ -1,10 +1,6 @@
 import axios from "axios";
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
-import firebaseConfig from "/src/firebaseConfig.js";
-import Model from "./Model.js";
-
-firebase.initializeApp(firebaseConfig);
 
 export default class Model {
     constructor() {

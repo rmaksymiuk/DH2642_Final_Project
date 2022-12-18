@@ -1,3 +1,3 @@
-export default function TotalGenresView(props){
+export default function AvgPopularityView(props){
 
 }
