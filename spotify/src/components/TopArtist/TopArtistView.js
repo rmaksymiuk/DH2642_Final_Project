@@ -8,7 +8,7 @@ export default function TopArtistView(props){
 
     function pageChangeACB(idx){
       setIndex(idx);
-      props.getTopArtist(idx);
+      props.getTopArtist(idx, props.token);
     }
 
     function findDetails(idx, item){

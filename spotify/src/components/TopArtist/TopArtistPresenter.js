@@ -28,5 +28,5 @@ export default function TopArtist(props) {
         });
     };
 
-    return <TopArtistView data = {data} getTopArtist = {getTopArtist}/>;
+    return <TopArtistView data = {data} getTopArtist = {getTopArtist} token = {props.model.token}/>;
 }

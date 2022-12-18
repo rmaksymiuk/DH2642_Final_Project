@@ -32,5 +32,5 @@ export default function TopTracks(props){
         });
     };
 
-    return <TopTracksView data = {data} getTopTrack = {getTopTrack}/>;
+    return <TopTracksView data = {data} getTopTrack = {getTopTrack} token = {props.model.token}/>;
 }

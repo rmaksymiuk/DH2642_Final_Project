@@ -6,11 +6,10 @@ const pageName = ["4 weeks", "6 months", "all time"];
 
 export default function TopTracksView(props){
     const [page, setPage] = useState(0);
-  
 
     function pageChangeACB(pg){
       setPage(pg);
-      props.getTopTrack(pg);
+      props.getTopTrack(pg, props.token);
     }
 
     function description(item,index){
