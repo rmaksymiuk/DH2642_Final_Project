@@ -1,7 +1,7 @@
 export default function AvgPopularityView(props){
     return(
         <ul>
-            <li> {props.popularity}</li>
+            <li> On average your artist's popularity is {props.popularity}</li>
         </ul>
     );
 }
