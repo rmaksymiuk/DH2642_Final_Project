@@ -15,8 +15,8 @@ export default function RecommendationsView(props) {
                 <ListItemAvatar style={{display:'flex', justifyContent:'flex-end'}}>
                   <Avatar src = {track.album.images[2].url} />
                 </ListItemAvatar>
-                <ListItemText class = "ListItem" primary={track.name}/>
-                <ListItemText class = "ListItem" primary={track.artists[0].name}/>
+                <ListItemText className = "ListItem" primary={track.name}/>
+                <ListItemText className = "ListItem" primary={track.artists[0].name}/>
               </ListItem>
         </a>
             </div>
