@@ -1,12 +1,14 @@
 import AvgPopularityView from "../Listening/AvgPopularityView.js";
 import TotalGenresView from "../Listening/TotalGenresView.js";
-import TopGenre from "../Listening/TopGenreView.js";
+import TopGenreView from "../Listening/TopGenreView.js";
+import TopYearPopularityView from "./TopYearPopularityView.js";
 import React, { useEffect, useState } from "react";
 
 export default function Listening(props) {
     const [numGenres, setNumGenres] = useState();
     const [avgPopularity, setAvgPopularity] = useState();
     const [topGenres, setTopGenres] =  useState();
+    const [topYearPopulariy, setTopYearPopulariy] = useState();
     function getArtistGenreACB(artist) {
         return artist.genres;
     }
@@ -15,6 +17,9 @@ export default function Listening(props) {
         return artist.popularity;
     }
 
+    function getDateACB(track){
+        return track.album.release_date;
+    }
     function getNumGenres() {
         const genres2d = props.model.artists.map(getArtistGenreACB);
         const genres1d = [].concat(...genres2d);
@@ -54,17 +59,39 @@ export default function Listening(props) {
         
     }
 
+    function getAverageYear() {
+        const dates = props?.model.tracks.map(getDateACB);
+        const years = dates.map(date => (date.substring(0,4)));
+        
+        const count = years.reduce((accumulator, current) => {
+            if (accumulator[current]) {
+              accumulator[current]++;
+            } else {
+              accumulator[current] = 1;
+            }
+            return accumulator;
+          }, {});
+        
+        const topThree = Object.entries(count)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3);
+
+        setTopYearPopulariy(topThree);
+    }
+
     function componentWasCreatedACB(){
         if(props.model.artists) {
             getNumGenres();
             getAveragePopularity();
             getTopGenres();
+            getAverageYear();
         }
     }
     React.useEffect(componentWasCreatedACB, [] );
 
     return <div>
-        <TopGenre topGenres = {topGenres}/>
+        <TopYearPopularityView topYears = {topYearPopulariy}/>
+        <TopGenreView topGenres = {topGenres}/>
         <AvgPopularityView popularity  = {avgPopularity}/>
         <TotalGenresView genres = {numGenres}/>
     </div>;
