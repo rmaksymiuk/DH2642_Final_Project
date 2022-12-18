@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createTheme } from '@mui/material/styles';
-import { purple } from '@mui/material/colors';
+import { purple, dark } from '@mui/material/colors';
 
 export const Theme = createTheme({
   palette: {

@@ -40,7 +40,6 @@ export default function TopTrack(){
 
     function pageChangeACB(pg){
       getTopTrack(pg);
-
     }
 
     function description(item,index){

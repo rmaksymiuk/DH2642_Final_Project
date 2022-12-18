@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import Navbar from "./components/Navbar/Navbar"
 import './App.css';
 import TopTrack from './components/TopTracks/TopTracks';
-import TopArtist from './components/TopArtist/TopArtist';
+import TopArtist from './components/TopArtist/TopArtistPresenter';
 import Recommendations from './components/Recommendations/RecommendationsPresenter';
 import Listening from './components/Listening/Listening';
 import Login from './components/LogIn/LogIn';
@@ -10,11 +10,14 @@ import {Route, Routes} from 'react-router-dom'
 import Main from './components/Main/Main'
 import axios from "axios";
 import Logout from './components/LogOut/Logout';
+import { ThemeProvider } from '@mui/material/styles';
+import {Theme} from "./Theme.js"
 
 function App() {
 
   return (
     <div className="App">
+    <ThemeProvider theme={Theme}>
         <Navbar />
         <Routes>
             <Route path="*" element={<Main/>}/>
@@ -24,7 +27,8 @@ function App() {
             <Route path="/listening" element={<Listening/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
-        </Routes> 
+        </Routes>
+    </ThemeProvider>
     </div>
   );
 }

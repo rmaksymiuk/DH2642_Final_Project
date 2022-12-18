@@ -24,9 +24,9 @@ export default function RecommendationsView(props) {
 
     return (
       <>
+        <ThemeProvider theme={Theme}>
         <h1 className="title">{"Recommendations"}</h1>
         <br/>
-        <ThemeProvider theme={Theme}>
             <List sx={{maxWidth: 800, width: '100%', bgcolor: 'background.paper'}}>
                 {props.data?.tracks?props.data.tracks.map((track)=>{return findDetailsACB(track)}):null}
             </List>
