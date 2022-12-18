@@ -5,7 +5,7 @@ const tabArr=["last 4 weeks", "last 6 months", "all time"];
 
 export default function TopArtistView(props){
     const [index, setIndex] = useState(0);
-
+    const i = 0;
     function pageChangeACB(idx){
       setIndex(idx);
       props.getTopArtist(idx, props.token);
