@@ -1,8 +1,8 @@
 export default function TopGenre(props){
 
-    function genreNameACB(element){
+    function genreNameACB(element, key){
         return (
-            <li>
+            <li key={element[0]}>
                 {element[0]}
             </li>);
         
