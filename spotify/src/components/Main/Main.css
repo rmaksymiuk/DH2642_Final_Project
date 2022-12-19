@@ -41,8 +41,12 @@
     padding: 20px;
     font-weight: bold;
     flex-direction: column;
+    margin-top: 40px;
 }
 
+.explain2{
+    display: none;
+}
 .att{
     font-weight: bold !important;
     color: red !important;
