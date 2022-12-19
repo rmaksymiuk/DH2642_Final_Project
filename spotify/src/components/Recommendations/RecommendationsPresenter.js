@@ -9,10 +9,10 @@ const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 
 const basic_artist=[
-  {id : "1GxkXlMwML1oSg5eLPiAz3"},{id :"1qC3LsWlbrRCPVRooOX81u"}
+  {id : "2S9W9aSAd7e5mp8WqWxN2h"},{id :"5kvxlmsGSMNf9bBtRbFLH2"}
 ]
 const basic_tracks=[
-  {id : "5PB7EuGxRLK1GQJjYJGhTD"},{id : "1N5QWchFtWyksichHzBIGN"},{id : "3eusN83SiYVrSA3hG4drFy"}
+  {id : "2S9W9aSAd7e5mp8WqWxN2h"},{id : "2S9W9aSAd7e5mp8WqWxN2h"},{id : "2S9W9aSAd7e5mp8WqWxN2h"}
 ]
 export default function Recommendations(props){
     const [data, setData] = useState({});

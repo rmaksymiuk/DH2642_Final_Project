@@ -61,7 +61,6 @@ export default function Listening(props) {
           .slice(0, 3);
 
           setTopGenres(topThree);
-        
     }
 
     function getAverageYearACB() {
@@ -108,6 +107,12 @@ export default function Listening(props) {
 
     if(numGenres && avgPopularity) {
         writeUserAveragesACB(numGenres, avgPopularity);
+    }
+    if(!numGenres && !avgPopularity && !topGenres && !topYearPopularity) {
+        setNumGenres(5);
+        setAvgPopularity(49);
+        setTopGenres([['post-teen pop',7], ['pop',4], ['dance pop',3]]);
+        setTopYearPopularity([[2003,14], [2004,2], [2005,1]]);
     }
 
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
