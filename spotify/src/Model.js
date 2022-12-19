@@ -16,8 +16,12 @@ export default class Model {
             this.setToken(localStorage.getItem("accessToken"));
             this.setArtists();
             this.setTracks();
+            this.setProfile();
             this.observers = [];
-            this.writeUserData("sofiyamitchell", "Sofiya Mitchell");
+        }
+        if(this.profile) {
+            this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+            console.log("wrote user data");
         }
     }
 
@@ -85,12 +89,31 @@ export default class Model {
         });
     }
 
-    writeUserData(userId, name) {
+    setProfile() {
+        axios
+          .get(MAIN_ENDPOINT, {
+            headers: {
+              "Authorization": "Bearer " + this.token,
+              "Content-Type": "application/json"
+            },
+          })
+          .then((response) => {
+            this.profile = response.data;
+            this.profile.id = this.profile.id.replace('.','');
+            this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+
+    writeUserData(userId, name, photoUrl) {
         const db = getDatabase();
         const reference = ref(db, 'users/' + userId);
         set(reference, {
             id: userId,
-            name: name
+            name: name,
+            profileUrl: photoUrl
         });
     }
 
