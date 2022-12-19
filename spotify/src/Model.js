@@ -20,10 +20,6 @@ export default class Model {
             this.setProfile();
             this.observers = [];
         }
-        if(this.profile) {
-            this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
-            console.log("wrote user data");
-        }
     }
 
     addObserver(callback){
@@ -50,7 +46,9 @@ export default class Model {
         if (this.observers) this.observers.forEach(invokeObserverCB);
     }
 
-
+    getId() {
+        return this.userId;
+    }
 
     getArtists()
     {
@@ -115,7 +113,12 @@ export default class Model {
           .then((response) => {
             this.profile = response.data;
             this.profile.id = this.profile.id.replace('.','');
+            this.profile.id = this.profile.id.replace('#','');
+            this.profile.id = this.profile.id.replace('$','');
+            this.profile.id = this.profile.id.replace('[','');
+            this.profile.id = this.profile.id.replace(']','');
             this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+            this.userId = this.profile.id;
           })
           .catch((error) => {
             console.log(error);

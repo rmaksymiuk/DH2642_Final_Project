@@ -26,6 +26,10 @@ export default function Recommendations(props){
     React.useEffect(componentWasCreatedACB, [] );
 
     function getRecommendationsACB(token, artists, tracks) {
+      if(!artists)
+        artists=basic_artist;
+      if(!tracks)
+        tracks=basic_tracks;
       if (artists.length<3)
         artists=basic_artist;
       if (tracks.length<3)
