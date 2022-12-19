@@ -13,7 +13,7 @@ export default function TopGenre(props){
         <div className = "introText">
             Your favorite genres have been
         </div>
-        <div>
+        <div className="number">
             {props?.topGenres?.map(genreNameACB)}
         </div>
     </div>
