@@ -7,7 +7,7 @@ import Recommendations from './components/Recommendations/RecommendationsPresent
 import Listening from './components/Listening/ListeningPresenter';
 import Login from './components/LogIn/LogIn';
 import {Route, Routes} from 'react-router-dom'
-import Main from './components/Main/Main'
+import Main from './components/Main/MainView'
 import axios from "axios";
 import Logout from './components/LogOut/Logout';
 import Model from "./Model.js"

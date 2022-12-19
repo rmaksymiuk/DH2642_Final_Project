@@ -4,6 +4,7 @@ import TopGenreView from "../Listening/TopGenreView.js";
 import "./Listening.css"
 import TopYearPopularityView from "./TopYearPopularityView.js";
 import React, { useEffect, useState } from "react";
+import { getDatabase, ref, push } from "firebase/database";
 
 export default function Listening(props) {
     const [numGenres, setNumGenres] = useState();
@@ -24,24 +25,24 @@ export default function Listening(props) {
     function getDateACB(track){
         return track.album.release_date;
     }
-    function getNumGenres() {
+    function getNumGenresACB() {
         const genres2d = props.model.artists.map(getArtistGenreACB);
         const genres1d = [].concat(...genres2d);
         let outputArray = genres1d.filter(function(v, i, self)
                 {
                     return i == self.indexOf(v);
                 });
-        setNumGenres(outputArray.length)
+        setNumGenres(outputArray.length);
     }
 
-    function getAveragePopularity() {
+    function getAveragePopularityACB() {
         const avgPopularity = props.model.artists.map(getArtistPopularityACB);
         const sum = avgPopularity.reduce((acc, val) => acc + val, 0);
         const average = Math.floor(sum / avgPopularity.length);
         setAvgPopularity(average);
     }
 
-    function getTopGenres() {
+    function getTopGenresACB() {
         const genres = props.model.artists.map(getArtistGenreACB);
 
         const counts = genres.reduce((counts, array) => {
@@ -63,7 +64,7 @@ export default function Listening(props) {
         
     }
 
-    function getAverageYear() {
+    function getAverageYearACB() {
         const dates = props?.model.tracks.map(getDateACB);
         const years = dates.map(date => (date.substring(0,4)));
         
@@ -87,15 +88,27 @@ export default function Listening(props) {
       setPage(pg);
     }
 
+    function writeUserAveragesACB(numGenres, avgPopularity) {
+        const db = getDatabase();
+        const reference = ref(db, 'genres/');
+        push(reference, {
+            totalGenres: numGenres,
+        });
+    }
+
     function componentWasCreatedACB(){
         if(props.model.artists) {
-            getNumGenres();
-            getAveragePopularity();
-            getTopGenres();
-            getAverageYear();
+            getNumGenresACB();
+            getAveragePopularityACB();
+            getTopGenresACB();
+            getAverageYearACB();
         }
     }
     React.useEffect(componentWasCreatedACB, [] );
+
+    if(numGenres && avgPopularity) {
+        writeUserAveragesACB(numGenres, avgPopularity);
+    }
 
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
     if(page == 0) {

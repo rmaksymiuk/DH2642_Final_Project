@@ -3,11 +3,11 @@ import { firebaseConfig } from "./FirebaseConfig.js";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
+import img2 from './components/Main/no image.jpeg';
 
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
-const REF = "https://trackify-f0bb2-default-rtdb.europe-west1.firebasedatabase.app/"
 
 const app = initializeApp(firebaseConfig);
 
@@ -117,12 +117,17 @@ export default class Model {
             this.profile.id = this.profile.id.replace('$','');
             this.profile.id = this.profile.id.replace('[','');
             this.profile.id = this.profile.id.replace(']','');
-            this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+            if(this.profile.images[0].url) {
+                this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+            } else {
+                this.writeUserData(this.profile.id, this.profile.display_name, img2);
+            }
             this.userId = this.profile.id;
           })
           .catch((error) => {
             console.log(error);
           });
+        console.log("set profile");
       };
 
     writeUserData(userId, name, photoUrl) {
