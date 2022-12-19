@@ -1,7 +1,7 @@
 import axios from "axios";
 import { firebaseConfig } from "./FirebaseConfig.js";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set } from "firebase/database";
+import { getDatabase, ref, set, onValue } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
 import img2 from './components/Main/no image.jpeg';
 
@@ -55,6 +55,10 @@ export default class Model {
         return this.artists;
     }
 
+    setGenreAvg(avg) {
+        this.genreAvg = avg;
+    }
+
     setToken(token) {
         this.token = token;
         const payload = {tokenToSetProp: token};
@@ -97,7 +101,6 @@ export default class Model {
         .catch((error) => {
             console.log(error);
         });
-
         const payload = {tracksToSetProp: promiseTracks};
         this.notifyObservers(payload);
     }
@@ -118,27 +121,27 @@ export default class Model {
             this.profile.id = this.profile.id.replace('[','');
             this.profile.id = this.profile.id.replace(']','');
             if(this.profile.images[0].url) {
-                this.writeUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+                this.setUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
             } else {
-                this.writeUserData(this.profile.id, this.profile.display_name, img2);
+                this.setUserData(this.profile.id, this.profile.display_name, img2);
             }
             this.userId = this.profile.id;
           })
           .catch((error) => {
             console.log(error);
           });
-        console.log("set profile");
       };
 
-    writeUserData(userId, name, photoUrl) {
+    setUserData(userId, name, photoUrl) {
         const db = getDatabase();
         const reference = ref(db, 'users/' + userId);
         set(reference, {
             id: userId,
             name: name,
             profileUrl: photoUrl
-        });
-    }
+        }
+    );
 
+    }
 
 }

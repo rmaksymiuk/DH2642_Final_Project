@@ -9,7 +9,7 @@ export default function AvgPopularityView(props){
             {props.popularity}/100
         </div>
         <div className = "introText">
-            Your favorite artist's average popularity is
+            The average popularity of all of our users is
         </div>
     </div>
     );
