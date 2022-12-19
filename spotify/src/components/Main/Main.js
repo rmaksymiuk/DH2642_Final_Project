@@ -43,7 +43,7 @@ export default function Main(){
             {token&&(data?.images)? 
                 <a target="_blank" rel="noreferrer" href={data.external_urls.spotify}><img className="user" src={data?.images[0]?.url? data.images[0].url: img2} alt="User Profile"/></a>
                 :<img className="logo" src={img} alt="spotify logo"/>}
-            <div className="explain">
+            <div className={token?"explain2": "explain"}>
               <div className="att">ATTENTION!</div>
               <br/>
               &nbsp;We used 'Spotify API' for our project, but our app is in 'Development mode'. So, only users are on our allowlist can use our app.
