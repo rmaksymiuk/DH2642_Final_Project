@@ -34,7 +34,7 @@ export default function TopArtistView(props){
           ?<div className="contents">
             {props.data.items.map((item, index)=>{return findDetails(index, item)})}
           </div>
-          :<div className="message">"You do not have sufficient play records."</div>}
+          :<div className="messages">You do not have sufficient play records</div>}
         </div>
       </>
     );

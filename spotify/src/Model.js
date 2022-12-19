@@ -1,6 +1,17 @@
 import axios from "axios";
+import { firebaseConfig } from "./FirebaseConfig.js";
+import { initializeApp } from "firebase/app";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
+import { getDatabase } from "firebase/database";
+
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
+const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
 export default class Model {
     constructor() {
@@ -9,6 +20,7 @@ export default class Model {
             this.setArtists();
             this.setTracks();
             this.observers = [];
+            this.writeUserData();
         }
     }
 
@@ -74,6 +86,10 @@ export default class Model {
         .catch((error) => {
             console.log(error);
         });
+    }
+
+    writeUserData() {
+
     }
 
 

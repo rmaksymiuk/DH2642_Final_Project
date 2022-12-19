@@ -3,17 +3,15 @@ import axios from "axios";
 import './Main.css';
 import img from "./spotify logo.png";
 import img2 from './no image.jpeg';
-
 const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
 
-export default function Main(){
+export default function Main(props){
     const [token, setToken] = useState("");
     const [data, setData] = useState({});
   
     useEffect(() => {
-      if (localStorage.getItem("accessToken")) {
-        setToken(localStorage.getItem("accessToken"));
-        getProfiles(localStorage.getItem("accessToken"));
+      if (props.model.token) {
+        getProfiles(props.model.token);
     }
     }, []);
   
@@ -32,6 +30,7 @@ export default function Main(){
             console.log(error);
           });
       };
+
     return (
       <div className="container">
         <div className="profiles">

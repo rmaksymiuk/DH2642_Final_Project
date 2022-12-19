@@ -2,18 +2,22 @@ export default function TopGenre(props){
 
     function genreNameACB(element, key){
         return (
-            <li key={element[0]}>
+            <div key={element[0]}>
                 {element[0]}
-            </li>);
+            </div>);
         
     }
 
     return (
-        <ul>
+    <div>
+        <div className = "introText">
+            Your favorite genres have been
+        </div>
+        <div>
             {props?.topGenres?.map(genreNameACB)}
-        </ul>
-        
-        );
+        </div>
+    </div>
+    );
       
         
 }
