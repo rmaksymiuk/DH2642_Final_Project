@@ -46,7 +46,7 @@ export default function Main(){
             <div className="explain">
               <div className="att">ATTENTION!</div>
               <br/>
-              &nbsp;We used 'Spotify API' for our project, but our app is in 'Development mode'. So, only the user who was added to our allowlist can use our app.
+              &nbsp;We used 'Spotify API' for our project, but our app is in 'Development mode'. So, only users are on our allowlist can use our app.
               You can use our app with our sample account.
                 <div className = "account">
                   ID: kidsland09@naver.com<br/>

@@ -8,7 +8,10 @@ export default function Listening(props) {
     const [numGenres, setNumGenres] = useState();
     const [avgPopularity, setAvgPopularity] = useState();
     const [topGenres, setTopGenres] =  useState();
-    const [topYearPopulariy, setTopYearPopulariy] = useState();
+    const [topYearPopularity, setTopYearPopularity] = useState();
+    const [page, setPage] = useState(0);
+    const pages = ["Popularity", "Total Genres", "Top Genre", "Top Year"];
+
     function getArtistGenreACB(artist) {
         return artist.genres;
     }
@@ -76,7 +79,12 @@ export default function Listening(props) {
         .sort((a, b) => b[1] - a[1])
         .slice(0, 3);
 
-        setTopYearPopulariy(topThree);
+        setTopYearPopularity(topThree);
+    }
+
+    function pageChangeACB(pg){
+      setPage(pg);
+      console.log("changed page");
     }
 
     function componentWasCreatedACB(){
@@ -89,10 +97,13 @@ export default function Listening(props) {
     }
     React.useEffect(componentWasCreatedACB, [] );
 
-    return <div>
-        <TopYearPopularityView topYears = {topYearPopulariy}/>
-        <TopGenreView topGenres = {topGenres}/>
-        <AvgPopularityView popularity  = {avgPopularity}/>
-        <TotalGenresView genres = {numGenres}/>
-    </div>;
+    return
+          <div className="menu">
+              <ul className="tabs">
+                 <li className={page===0?'is_active':''} onClick = {() => pageChangeACB(0)}>{pages[0]}</li>
+                 <li className={page===1?'is_active':''} onClick = {() => pageChangeACB(1)}>{pages[1]}</li>
+                 <li className={page===2?'is_active':''} onClick = {() => pageChangeACB(2)}>{pages[2]}</li>
+                 <li className={page===3?'is_active':''} onClick = {() => pageChangeACB(3)}>{pages[3]}</li>
+              </ul>
+          </div>;
 }
