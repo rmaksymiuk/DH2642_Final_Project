@@ -2,6 +2,7 @@ import axios from "axios";
 import { firebaseConfig } from "./FirebaseConfig.js";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set } from "firebase/database";
+import resolvePromise from "./resolvePromise.js"
 
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
@@ -45,6 +46,7 @@ export default class Model {
                 console.error(err); 
             }  
         }
+        
         if (this.observers) this.observers.forEach(invokeObserverCB);
     }
 
@@ -57,9 +59,13 @@ export default class Model {
 
     setToken(token) {
         this.token = token;
+        const payload = {tokenToSetProp: token};
+        this.notifyObservers(payload);
+       
     }
 
     setArtists() {
+        let promiseArtists;
         axios.get(TOPARTIST_ENDPOINT+"?limit=20", {
             headers: {
                 "Authorization": "Bearer " + this.token,
@@ -67,14 +73,19 @@ export default class Model {
             },
         })
         .then((response) => {
+            promiseArtists = response.data.items
             this.artists = response.data.items;
         })
         .catch((error) => {
             console.log(error);
         });
+
+        const payload = {arstistToSetProp: promiseArtists};
+        this.notifyObservers(payload);
     }
 
     setTracks() {
+        let promiseTracks;
         axios.get(TOPTRACK_ENDPOINT+"?limit=20", {
             headers: {
                 "Authorization": "Bearer " + this.token,
@@ -82,11 +93,15 @@ export default class Model {
             },
         })
         .then((response) => {
+            promiseTracks = response.data.items;
             this.tracks = response.data.items;
         })
         .catch((error) => {
             console.log(error);
         });
+
+        const payload = {tracksToSetProp: promiseTracks};
+        this.notifyObservers(payload);
     }
 
     setProfile() {
