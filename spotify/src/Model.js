@@ -14,6 +14,7 @@ export default class Model {
 
     addObserver(callback){
         this.observers = [...this.observers, callback];
+        
     }
 
     removeObserver(callbackToRemove){
