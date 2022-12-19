@@ -17,7 +17,8 @@
 }
 
 .text{
-    font-size: 40px !important;
+    font-size: 30px !important;
+    font-weight: bold;
     margin: 20px 0px;
     text-align: center;
     white-space: nowrap;
@@ -31,6 +32,7 @@
 
 .inbt{
     font-size: 18px;
+    font-weight: bold;
     width: 200px;
     height: 30px;
     margin: 20px;
