@@ -120,7 +120,7 @@ export default class Model {
             this.profile.id = this.profile.id.replace('$','');
             this.profile.id = this.profile.id.replace('[','');
             this.profile.id = this.profile.id.replace(']','');
-            if(this.profile.images[0].url) {
+            if(this.profile.images[0]) {
                 this.setUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
             } else {
                 this.setUserData(this.profile.id, this.profile.display_name, img2);
