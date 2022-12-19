@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./TopTracks.css"
 
-const pageName = ["4 weeks", "6 months", "all time"];
+const pageName = ["last 4 weeks", "last 6 months", "all time"];
 
 export default function TopTracksView(props){
     const [page, setPage] = useState(0);
@@ -59,7 +59,7 @@ export default function TopTracksView(props){
             </tbody>
           </table>
         </div>
-        :<div className="text">"You do not have sufficient play records"</div>}
+        :<div className="texts">You do not have sufficient play records</div>}
       </>
     );
   };
