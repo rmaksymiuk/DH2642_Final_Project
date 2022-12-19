@@ -42,6 +42,7 @@ export default class Model {
                 console.error(err); 
             }  
         }
+        
         if (this.observers) this.observers.forEach(invokeObserverCB);
     }
 

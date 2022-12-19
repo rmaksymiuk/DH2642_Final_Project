@@ -5,6 +5,7 @@ function resolvePromise(promise, promiseState, notify){
     else {
         return;
     }
+    
     promiseState.data = null;
     promiseState.error = null;
 
