@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './LogIn.css';
-const CLIENT_ID = "f3249000e56a4740b15910bc9611b894";
+const CLIENT_ID = "acb0d4e1978245188e48efd073036e0c";
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
 const REDIRECT_URL = "http://localhost:3000/login";
 //Please change this URL part to http://localhost:3000 when you run it in your local server
