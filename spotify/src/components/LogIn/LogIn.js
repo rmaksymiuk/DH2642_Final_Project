@@ -12,6 +12,7 @@ const SCOPES = [
 ];
 const PARAM = SCOPES.join("%20");
 
+
 const splitCurrentHashCB = (hash) => {
   const hashstr = hash.substring(1);
   const params = hashstr.split("&");
@@ -40,6 +41,7 @@ export default function Login(){
       reRender();
     }
   });
+
 
   function handleLoginACB() {
     window.location = `${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URL}&scope=${PARAM}&response_type=token&show_dialog=true`;
