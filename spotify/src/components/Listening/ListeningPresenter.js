@@ -84,7 +84,6 @@ export default function Listening(props) {
 
     function pageChangeACB(pg){
       setPage(pg);
-      console.log("changed page");
     }
 
     function componentWasCreatedACB(){
