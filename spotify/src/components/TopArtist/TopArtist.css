@@ -1,7 +1,4 @@
-.message{
-    text-align: center;
-    margin-top: 30px;
-}
+
 .container {
     display: flex;
     flex-direction: column;    
@@ -64,6 +61,13 @@
     max-width: 1200px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+}
+
+.messages{
+    font-size: 30px !important;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .details{
