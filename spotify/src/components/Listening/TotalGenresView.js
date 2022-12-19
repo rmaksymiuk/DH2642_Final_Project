@@ -1,11 +1,16 @@
 export default function TotalGenresView(props){
     return (
-        <div>
-            <ul>
-                <li> You have listened in total of { props.genres} genres.</li>
-            </ul>
-           
+    <div>
+        <div className = "introText">
+            You listened to a total of
         </div>
+        <div className = "number">
+            {props.genres}
+        </div>
+        <div className = "introText">
+            Genres this past year!
+        </div>
+    </div>
        
     );
         

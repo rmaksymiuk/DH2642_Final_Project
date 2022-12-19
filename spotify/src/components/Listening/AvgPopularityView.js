@@ -1,7 +1,13 @@
+import "./Listening.css"
 export default function AvgPopularityView(props){
     return(
-        <ul>
-            <li> On average your artist's popularity is {props.popularity}</li>
-        </ul>
+    <div>
+        <div className = "introText">
+            Your favorite artist's average popularity is
+        </div>
+        <div className = "number">
+            {props.popularity}
+        </div>
+    </div>
     );
 }

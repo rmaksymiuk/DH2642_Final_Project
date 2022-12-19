@@ -1,6 +1,7 @@
 import AvgPopularityView from "../Listening/AvgPopularityView.js";
 import TotalGenresView from "../Listening/TotalGenresView.js";
 import TopGenreView from "../Listening/TopGenreView.js";
+import "./Listening.css"
 import TopYearPopularityView from "./TopYearPopularityView.js";
 import React, { useEffect, useState } from "react";
 
@@ -10,7 +11,7 @@ export default function Listening(props) {
     const [topGenres, setTopGenres] =  useState();
     const [topYearPopularity, setTopYearPopularity] = useState();
     const [page, setPage] = useState(0);
-    const pages = ["Popularity", "Total Genres", "Top Genre", "Top Year"];
+    const pages = ["Popularity", "Total Genres", "Top Genres", "Top Years"];
 
     function getArtistGenreACB(artist) {
         return artist.genres;
@@ -105,7 +106,7 @@ export default function Listening(props) {
         component = <TopGenreView topGenres = {topGenres}/>
     }
 
-    return <div>
+    return <div className = "page">
           <div className="menu">
               <ul className="tabs">
                  <li className={page===0?'is_active':''} onClick = {() => pageChangeACB(0)}>{pages[0]}</li>
@@ -115,5 +116,5 @@ export default function Listening(props) {
               </ul>
           </div>
           {component}
-          </div>;
+    </div>;
 }
