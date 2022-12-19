@@ -46,9 +46,7 @@ class Navbar extends React.Component {
                         })
                     }
                 </ul>
-                <ThemeProvider theme={Theme}>
                     {localStorage.getItem('accessToken')?<Button color="success" onClick= {logoutACB} size="small" variant="contained">Log Out</Button>:<Button color="success" onClick = {loginACB} size="small" variant="contained">Log In</Button>}
-                </ThemeProvider>
             </nav>
         );
 }

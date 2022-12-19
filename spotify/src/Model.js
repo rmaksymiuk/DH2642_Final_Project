@@ -42,4 +42,6 @@ export default class Model {
             console.log(error);
         });
     }
+
+
 }

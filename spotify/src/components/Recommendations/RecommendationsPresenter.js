@@ -1,12 +1,16 @@
 import RecommendationsView from "../Recommendations/RecommendationsView.js";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+
 const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 
 export default function Recommendations(props){
     const [data, setData] = useState({});
+    const [,reRender]= useState("");
 
     function componentWasCreatedACB(){
           if (props.model.token && props.model.tracks && props.model.artists) {
@@ -30,5 +34,11 @@ export default function Recommendations(props){
         });
     };
 
-    return <RecommendationsView data = {data}/>;
+    if(!props.model.tracks && !props.model.artists) {
+		return <Box sx={{ display: 'flex' }}>
+                     <CircularProgress />
+                   </Box>;
+    } else {
+        return <RecommendationsView data = {data}/>;
+    }
 }

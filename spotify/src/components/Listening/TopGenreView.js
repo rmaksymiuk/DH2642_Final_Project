@@ -1,5 +1,4 @@
 export default function TopGenre(props){
-
     function genreNameACB(element){
         return (
             <li>{element[0]}</li>
@@ -9,12 +8,11 @@ export default function TopGenre(props){
         <div>
             Top 3 Genres:
             <ul>
-                
                 {props.topGenres.map(genreNameACB)}
             </ul>
-        
+
         </div>
-       
+
     );
         
 }

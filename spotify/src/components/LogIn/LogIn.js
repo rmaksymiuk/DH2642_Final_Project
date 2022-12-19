@@ -53,7 +53,7 @@ export default function Login(){
     <div className="contin">
       <div className="cont">
         <div className="text">{localStorage.getItem('accessToken')
-          ?"LogIn Successful"
+          ?"Login Successful"
           :"Do you want to use our service?"}</div>
         {!localStorage.getItem('accessToken')
           ?<div className="btns">

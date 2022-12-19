@@ -7,6 +7,7 @@ export default function Listening(props) {
     const [numGenres, setNumGenres] = useState();
     const [avgPopularity, setAvgPopularity] = useState();
     const [topGenres, setTopGenres] =  useState();
+
     function getArtistGenreACB(artist) {
         return artist.genres;
     }
@@ -45,13 +46,13 @@ export default function Listening(props) {
             }
             return counts;
           }, {});
-        
+
           const topThree = Object.entries(counts)
           .sort((a, b) => b[1] - a[1])
           .slice(0, 3);
 
           setTopGenres(topThree);
-        
+
     }
 
     function componentWasCreatedACB(){

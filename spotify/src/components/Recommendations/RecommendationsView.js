@@ -4,19 +4,26 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import { ThemeProvider } from '@mui/material/styles';
-import {Theme} from "../../Theme.js"
+import "./Recommendations.css"
+import Typography from '@mui/material/Typography';
+import { ThemeProvider, createTheme } from '@mui/system';
 
 export default function RecommendationsView(props) {
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
-        <a target="_blank" href={track.external_urls.spotify}>
-              <ListItem>
-                <ListItemAvatar style={{display:'flex', justifyContent:'flex-end'}}>
-                  <Avatar src = {track.album.images[2].url} />
-                </ListItemAvatar>
-                <ListItemText className = "ListItem" primary={track.name}/>
-                <ListItemText className = "ListItem" primary={track.artists[0].name}/>
+        <a target="_blank" style= {{textDecoration:'none'}} href={track.external_urls.spotify}>
+              <ListItem divider>
+                <div className = "avatar">
+                    <ListItemAvatar>
+                      <Avatar src = {track.album.images[1].url} sx={{ height: 100, width: 100 }}/>
+                    </ListItemAvatar>
+                </div>
+                <div className = "songName">
+                    <ListItemText disableTypography primary={<Typography type="body2" style={{ fontSize: 30}}>{track.name}</Typography>}/>
+                </div>
+                <div class = "trackArtist">
+                    <ListItemText className = "ListItem" primary={<Typography type="body2" style={{ fontSize: 20}}>{track.artists[0].name}</Typography>}/>
+                </div>
               </ListItem>
         </a>
             </div>
@@ -24,13 +31,17 @@ export default function RecommendationsView(props) {
 
     return (
       <>
-        <ThemeProvider theme={Theme}>
         <h1 className="title">{"Recommendations"}</h1>
         <br/>
-            <List sx={{maxWidth: 800, width: '100%', bgcolor: 'background.paper'}}>
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}>
+            <List sx={{maxWidth: 800, width: '100%', }}>
                 {props.data?.tracks?props.data.tracks.map((track)=>{return findDetailsACB(track)}):null}
             </List>
-        </ThemeProvider>
+        </div>
       </>
     );
 }

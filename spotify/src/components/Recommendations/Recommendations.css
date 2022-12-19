@@ -1,8 +1,24 @@
-.trackName {
-    font-size: 30px;
-    margin: 10px;
+.icon {
+    width: 100%;
 }
-.ListItemText {
+
+.avatar {
+    margin-right: 20px;
     display:'flex';
     justifyContent:'flex-end';
+    float: 'left';
+}
+
+.songName {
+    float: 'left';
+    margin-right: 20px;
+    text-size: 100px;
+    color: black;
+    font-weight: 50px;
+}
+
+.trackArtist {
+    font-size: 40px;
+    float: 'left';
+    color: black;
 }
