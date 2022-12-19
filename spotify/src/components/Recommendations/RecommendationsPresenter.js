@@ -8,12 +8,17 @@ const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 
+const basic_artist=[
+  {id : "1GxkXlMwML1oSg5eLPiAz3"},{id :"1qC3LsWlbrRCPVRooOX81u"}
+]
+const basic_tracks=[
+  {id : "5PB7EuGxRLK1GQJjYJGhTD"},{id : "1N5QWchFtWyksichHzBIGN"},{id : "3eusN83SiYVrSA3hG4drFy"}
+]
 export default function Recommendations(props){
     const [data, setData] = useState({});
     const [,reRender]= useState("");
-
     function componentWasCreatedACB(){
-          if (props.model.token && props.model.tracks && props.model.artists) {
+          if (props.model.token) {
             getRecommendationsACB(props.model.token, props.model.artists, props.model.tracks);
           }
           reRender({});
@@ -21,6 +26,11 @@ export default function Recommendations(props){
     React.useEffect(componentWasCreatedACB, [] );
 
     function getRecommendationsACB(token, artists, tracks) {
+      if (artists.length<3)
+        artists=basic_artist;
+      if (tracks.length<3)
+        tracks=basic_tracks;
+      if (artists)
         axios.get(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+artists[0].id+","+artists[1].id+"&seed_tracks="+tracks[0].id+","+tracks[1].id+","+tracks[2].id, {
                 headers: {
                     "Authorization": "Bearer " + token,

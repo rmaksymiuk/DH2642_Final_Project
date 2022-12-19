@@ -1,7 +1,6 @@
 import axios from "axios";
 import { firebaseConfig } from "./FirebaseConfig.js";
 import { initializeApp } from "firebase/app";
-import firebase from 'firebase/compat/app';
 import { getDatabase, ref, set } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
 
@@ -10,8 +9,7 @@ const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
 const REF = "https://trackify-f0bb2-default-rtdb.europe-west1.firebasedatabase.app/"
 
-const app = firebase.initializeApp(firebaseConfig);
-const db = getDatabase(app);
+const app = initializeApp(firebaseConfig);
 
 export default class Model {
     constructor() {
@@ -20,7 +18,7 @@ export default class Model {
             this.setArtists();
             this.setTracks();
             this.observers = [];
-            this.writeUserData();
+            this.writeUserData("sofiyamitchell", "Sofiya Mitchell");
         }
     }
 
@@ -101,8 +99,13 @@ export default class Model {
         this.notifyObservers(payload);
     }
 
-    writeUserData() {
-        console.log("writing user data");
+    writeUserData(userId, name) {
+        const db = getDatabase();
+        const reference = ref(db, 'users/' + userId);
+        set(reference, {
+            id: userId,
+            name: name
+        });
     }
 
 
