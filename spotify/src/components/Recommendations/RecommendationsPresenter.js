@@ -49,6 +49,8 @@ export default function Recommendations(props){
 		return <Box sx={{ display: 'flex' }}>
                      <CircularProgress />
                    </Box>;
+    } else if(props.model.tracks.length < 3 || props.model.artists.length < 2) {
+        return <div className="text">"You do not have sufficient play records"</div>;
     } else {
         return <RecommendationsView data = {data}/>;
     }

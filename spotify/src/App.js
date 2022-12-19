@@ -18,7 +18,7 @@ function App() {
     <div className="App">
         <Navbar />
         <Routes>
-            <Route path="*" element={<Main/>}/>
+            <Route path="*" element={<Main model = {model}/>}/>
             <Route path="/topTracks" element={<TopTrack model = {model}/>}/>
             <Route path="/topArtist" element={<TopArtist model = {model}/>}/>
             <Route path="/recommendations" element={<Recommendations model = {model}/>}/>
