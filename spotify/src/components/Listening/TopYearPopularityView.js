@@ -11,11 +11,16 @@ export default function AvgYear(props){
     
     
     return (
-        
-        <ul>
-            {props?.topYears?.map(yearACB)}
-        </ul>
+        <div>
+            <div className = "introText">
+                Your Most Popular years are:
+            </div>
             
+            <ul className="number">
+                {props?.topYears?.map(yearACB)}
+            </ul>   
+        </div>
+        
        
         );
       
