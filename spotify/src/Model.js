@@ -8,7 +8,37 @@ export default class Model {
             this.setToken(localStorage.getItem("accessToken"));
             this.setArtists();
             this.setTracks();
+            this.observers = [];
         }
+    }
+
+    addObserver(callback){
+        this.observers = [...this.observers, callback];
+    }
+
+    removeObserver(callbackToRemove){
+        function isNotSameCallbackCB(callback){
+            return (callback !== callbackToRemove);
+        }
+        this.observers = this.observers.filter(isNotSameCallbackCB);
+    }
+
+    notifyObservers(payload){
+        function invokeObserverCB(obs){ 
+            try{
+                obs(payload)
+            } catch(err){
+                console.error(err); 
+            }  
+        }
+        if (this.observers) this.observers.forEach(invokeObserverCB);
+    }
+
+
+
+    getArtists()
+    {
+        return this.artists;
     }
 
     setToken(token) {
