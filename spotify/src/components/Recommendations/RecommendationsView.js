@@ -21,7 +21,7 @@ export default function RecommendationsView(props) {
                 <div className = "songName">
                     <ListItemText disableTypography primary={<Typography type="body2" style={{ fontSize: 30}}>{track.name}</Typography>}/>
                 </div>
-                <div class = "trackArtist">
+                <div className = "trackArtist">
                     <ListItemText className = "ListItem" primary={<Typography type="body2" style={{ fontSize: 20}}>{track.artists[0].name}</Typography>}/>
                 </div>
               </ListItem>

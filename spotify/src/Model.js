@@ -4,9 +4,11 @@ const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 
 export default class Model {
     constructor() {
-        this.setToken(localStorage.getItem("accessToken"));
-        this.setArtists();
-        this.setTracks();
+        if(localStorage.getItem("accessToken")) {
+            this.setToken(localStorage.getItem("accessToken"));
+            this.setArtists();
+            this.setTracks();
+        }
     }
 
     setToken(token) {

@@ -16,6 +16,7 @@ export default function Recommendations(props){
           if (props.model.token && props.model.tracks && props.model.artists) {
             getRecommendationsACB(props.model.token, props.model.artists, props.model.tracks);
           }
+          reRender({});
     }
     React.useEffect(componentWasCreatedACB, [] );
 
