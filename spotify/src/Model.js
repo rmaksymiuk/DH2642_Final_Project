@@ -2,16 +2,15 @@ import axios from "axios";
 import { firebaseConfig } from "./FirebaseConfig.js";
 import { initializeApp } from "firebase/app";
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/compat/firestore';
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
+const REF = "https://trackify-f0bb2-default-rtdb.europe-west1.firebasedatabase.app/"
 
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const app = firebase.initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 export default class Model {
     constructor() {
@@ -58,7 +57,7 @@ export default class Model {
     }
 
     writeUserData() {
-
+        console.log("writing user data");
     }
 
 
