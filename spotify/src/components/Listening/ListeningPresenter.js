@@ -97,7 +97,16 @@ export default function Listening(props) {
     }
     React.useEffect(componentWasCreatedACB, [] );
 
-    return
+    let component = <TopYearPopularityView topYears = {topYearPopularity}/>
+    if(page == 0) {
+        component = <AvgPopularityView popularity = {avgPopularity}/>;
+    } else if(page == 1) {
+        component = <TotalGenresView genres = {numGenres}/>;
+    } else if(page == 2) {
+        component = <TopGenreView topGenres = {topGenres}/>
+    }
+
+    return <div>
           <div className="menu">
               <ul className="tabs">
                  <li className={page===0?'is_active':''} onClick = {() => pageChangeACB(0)}>{pages[0]}</li>
@@ -105,5 +114,7 @@ export default function Listening(props) {
                  <li className={page===2?'is_active':''} onClick = {() => pageChangeACB(2)}>{pages[2]}</li>
                  <li className={page===3?'is_active':''} onClick = {() => pageChangeACB(3)}>{pages[3]}</li>
               </ul>
+          </div>
+          {component}
           </div>;
 }
