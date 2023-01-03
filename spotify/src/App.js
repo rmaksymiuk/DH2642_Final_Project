@@ -5,11 +5,11 @@ import TopTrack from './components/TopTracks/TopTracksPresenter';
 import TopArtist from './components/TopArtist/TopArtistPresenter';
 import Recommendations from './components/Recommendations/RecommendationsPresenter';
 import Listening from './components/Listening/ListeningPresenter';
-import Login from './components/LogIn/LogIn';
+import Login from './components/LogIn/LogInPresenter';
 import {Route, Routes} from 'react-router-dom'
 import Main from './components/Main/MainView'
 import axios from "axios";
-import Logout from './components/LogOut/Logout';
+import Logout from './components/LogOut/LogoutPresenter';
 import Model from "./Model.js"
 
 function App() {
