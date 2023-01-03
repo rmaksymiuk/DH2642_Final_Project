@@ -6,6 +6,7 @@ import promiseNoData from '../../promiseNoData';
 
 export default function TopArtist(props) {
     const [data, setData] = useState({});
+    const [index, setIndex] = useState(0);
     const [resi] = useState({promise: null, data: null, error: null})
     const [,reRender]= useState({});
 
@@ -27,7 +28,7 @@ export default function TopArtist(props) {
         <div>
             {promiseNoData(resi.promise, resi.data, resi.error)
             ||<TopArtistView data={resi.data} token={props.model.token}
-                getTopArtist={getTopArtistACB}/>}
+                getTopArtist={getTopArtistACB} index={index} idx={setIndex}/>}
         </div>
     )
 }
