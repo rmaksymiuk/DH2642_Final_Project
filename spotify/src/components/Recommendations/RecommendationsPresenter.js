@@ -1,61 +1,34 @@
 import RecommendationsView from "../Recommendations/RecommendationsView.js";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
+import resolvePromise from '../../resolvePromise.js'
+import {getRecommendations_assist} from '../../utilities.js';
+import promiseNoData from '../../promiseNoData';
 
-const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
-const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
-const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
-
-const basic_artist=[
-  {id : "2S9W9aSAd7e5mp8WqWxN2h"},{id :"5kvxlmsGSMNf9bBtRbFLH2"}
-]
-const basic_tracks=[
-  {id : "2S9W9aSAd7e5mp8WqWxN2h"},{id : "2S9W9aSAd7e5mp8WqWxN2h"},{id : "2S9W9aSAd7e5mp8WqWxN2h"}
-]
 export default function Recommendations(props){
     const [data, setData] = useState({});
-    const [,reRender]= useState("");
-    function componentWasCreatedACB(){
-          if (props.model.token) {
-            getRecommendationsACB(props.model.token, props.model.artists, props.model.tracks);
-          }
-          reRender({});
+    const [resi] = useState({promise: null, data: null, error: null})
+    const [,reRender]= useState({});
+
+
+    useEffect(() => {
+         if (props.model.token) {
+            resolvePromise(getRecommendations_assist(props.model.token, props.model.artists, props.model.tracks),resi, notifyACB);
+        };
+       }, []);
+
+    function notifyACB(){
+        reRender({});
     }
-    React.useEffect(componentWasCreatedACB, [] );
 
     function getRecommendationsACB(token, artists, tracks) {
-      if(!artists)
-        artists=basic_artist;
-      if(!tracks)
-        tracks=basic_tracks;
-      if (artists.length<3)
-        artists=basic_artist;
-      if (tracks.length<3)
-        tracks=basic_tracks;
-      if (artists)
-        axios.get(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+artists[0].id+","+artists[1].id+"&seed_tracks="+tracks[0].id+","+tracks[1].id+","+tracks[2].id, {
-                headers: {
-                    "Authorization": "Bearer " + token,
-                    "Content-Type": "application/json"
-                },
-            })
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-
-    if(!props.model.tracks && !props.model.artists) {
-		return <Box sx={{ display: 'flex' }}>
-                     <CircularProgress />
-                   </Box>;
-    } else if(props.model.tracks.length < 3 || props.model.artists.length < 2) {
-        return <div className="text">"You do not have sufficient play records"</div>;
-    } else {
-        return <RecommendationsView data = {data}/>;
+        resolvePromise(getRecommendations_assist(token, artists, tracks),resi, notifyACB);
     }
+
+    return (
+        <div>
+            {promiseNoData(resi.promise, resi.data, resi.error)
+            ||<RecommendationsView data={resi.data} token={props.model.token}
+                getRecommendations={getRecommendationsACB}/>}
+        </div>
+    )
 }

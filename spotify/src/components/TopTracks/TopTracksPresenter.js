@@ -1,36 +1,33 @@
 import TopTracksView from "../TopTracks/TopTracksView.js";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
-const timeFrame =  ["short_term", "medium_term", "long_term"];
+import resolvePromise from '../../resolvePromise.js'
+import {getTopTrack_assist} from '../../utilities.js';
+import promiseNoData from '../../promiseNoData';
 
 export default function TopTracks(props){
     const [data, setData] = useState();
+    const [resi] = useState({promise: null, data: null, error: null})
+    const [,reRender]= useState({});
 
     useEffect(() => {
-
       if (props.model.token) {
-        getTopTrack(0, props.model.token);
+            resolvePromise(getTopTrack_assist(0, props.model.token),resi, notifyACB);
       }
 
     }, []);
 
-    function getTopTrack(pg, token) {
-      axios
-        .get(TOPTRACK_ENDPOINT+"?time_range="+timeFrame[pg], {
-          headers: {
-            "Authorization": "Bearer " + token,
-            "Content-Type": "application/json"
-          },
-        })
-        .then((response) => {
-          setData(response.data);
+    function notifyACB(){
+        reRender({});
+    }
 
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+    function getTopTrackACB(idx, token){
+        resolvePromise(getTopTrack_assist(idx, token), resi, notifyACB);
+    }
 
-    return <TopTracksView data = {data} getTopTrack = {getTopTrack} token = {props.model.token}/>;
+    return (
+        <div>
+            {promiseNoData(resi.promise, resi.data, resi.error)
+            ||<TopTracksView data = {resi.data} getTopTrack = {getTopTrackACB} token = {props.model.token}/>}
+        </div>
+    )
 }

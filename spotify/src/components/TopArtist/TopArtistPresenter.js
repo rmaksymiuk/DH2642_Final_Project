@@ -8,6 +8,7 @@ export default function TopArtist(props) {
     const [data, setData] = useState({});
     const [resi] = useState({promise: null, data: null, error: null})
     const [,reRender]= useState({});
+
     useEffect(() => {
          if (props.model.token) {
             resolvePromise(getTopArtist_assist(0, props.model.token),resi, notifyACB);
