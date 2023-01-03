@@ -1,32 +1,32 @@
 import TopArtistView from "../TopArtist/TopArtistView.js";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
-const timeRange=["short_term", "medium_term", "long_term"];
+import resolvePromise from '../../resolvePromise.js'
+import {getTopArtist_assist} from '../../utilities.js';
+import promiseNoData from '../../promiseNoData';
 
 export default function TopArtist(props) {
     const [data, setData] = useState({});
-
+    const [resi] = useState({promise: null, data: null, error: null})
+    const [,reRender]= useState({});
     useEffect(() => {
          if (props.model.token) {
-           getTopArtist(0, props.model.token);
-         };
+            resolvePromise(getTopArtist_assist(0, props.model.token),resi, notifyACB);
+        };
        }, []);
 
-    function getTopArtist(idx, token) {
-        axios.get(TOPARTIST_ENDPOINT+"?time_range="+timeRange[idx]+"&limit=20", {
-            headers: {
-                "Authorization": "Bearer " + token,
-                "Content-Type": "application/json"
-            },
-        })
-        .then((response) => {
-            setData(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
+    function notifyACB(){
+        reRender({});
+    }
 
-    return <TopArtistView data = {data} getTopArtist = {getTopArtist} token = {props.model.token}/>;
+    function getTopArtistACB(idx, token){
+        resolvePromise(getTopArtist_assist(idx, token), resi, notifyACB);
+    }
+
+    return (
+        <div>
+            {promiseNoData(resi.promise, resi.data, resi.error)
+            ||<TopArtistView data={resi.data} token={props.model.token}
+                getTopArtist={getTopArtistACB}/>}
+        </div>
+    )
 }
