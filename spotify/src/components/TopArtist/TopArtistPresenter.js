@@ -5,14 +5,13 @@ import {getTopArtist_assist} from '../../utilities.js';
 import promiseNoData from '../../promiseNoData';
 
 export default function TopArtist(props) {
-    const [data, setData] = useState({});
     const [index, setIndex] = useState(0);
-    const [resi] = useState({promise: null, data: null, error: null})
+    const [promiseState] = useState({promise: null, data: null, error: null})
     const [,reRender]= useState({});
 
     useEffect(() => {
          if (props.model.token) {
-            resolvePromise(getTopArtist_assist(0, props.model.token),resi, notifyACB);
+            resolvePromise(getTopArtist_assist(0, props.model.token),promiseState, notifyACB);
         };
        }, []);
 
@@ -21,13 +20,13 @@ export default function TopArtist(props) {
     }
 
     function getTopArtistACB(idx, token){
-        resolvePromise(getTopArtist_assist(idx, token), resi, notifyACB);
+        resolvePromise(getTopArtist_assist(idx, token), promiseState, notifyACB);
     }
 
     return (
         <div>
-            {promiseNoData(resi.promise, resi.data, resi.error)
-            ||<TopArtistView data={resi.data} token={props.model.token}
+            {promiseNoData(promiseState.promise, promiseState.data, promiseState.error)
+            ||<TopArtistView data={promiseState.data} token={props.model.token}
                 getTopArtist={getTopArtistACB} index={index} idx={setIndex}/>}
         </div>
     )
