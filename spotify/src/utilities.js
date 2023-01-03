@@ -17,7 +17,7 @@ export function getTopArtist_assist(idx, token) {
 };
 
 export function getTopTrack_assist(idx, token) {
-    return fetch(TOPTRACK_ENDPOINT+"?time_range="+timeRange[idx]+"&limit=20", {
+    return fetch(TOPTRACK_ENDPOINT+"?time_range="+timeRange[idx], {
         headers: {
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json"
