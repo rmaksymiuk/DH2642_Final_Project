@@ -7,6 +7,7 @@ import promiseNoData from '../../promiseNoData';
 export default function TopTracks(props){
     const [data, setData] = useState();
     const [resi] = useState({promise: null, data: null, error: null})
+    const [page, setPage] = useState(0);
     const [,reRender]= useState({});
 
     useEffect(() => {
@@ -27,7 +28,8 @@ export default function TopTracks(props){
     return (
         <div>
             {promiseNoData(resi.promise, resi.data, resi.error)
-            ||<TopTracksView data = {resi.data} getTopTrack = {getTopTrackACB} token = {props.model.token}/>}
+            ||<TopTracksView data = {resi.data} getTopTrack = {getTopTrackACB} token = {props.model.token}
+            page={page} pg={setPage}/>}
         </div>
     )
 }
