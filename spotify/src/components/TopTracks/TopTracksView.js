@@ -44,7 +44,7 @@ export default function TopTracksView(props){
               </ul>
           </div>
         </div>
-        {props.data?.total?
+        {props.data?.length?
         <div className="tableDiv">
           <table className="tableStyle">
             <thead>
@@ -58,7 +58,7 @@ export default function TopTracksView(props){
             </thead>
             <tbody>
                 {size.map((number)=> tableCounter(number))}
-                {props.data?.items ? props.data.items.map((item,index) => description(item,index)) : null}
+                {props.data.map((item,index) => description(item,index))}
             </tbody>
           </table>
         </div>
