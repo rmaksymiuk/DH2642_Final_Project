@@ -74,7 +74,6 @@ export default class Model {
         function notifyACB() {
             this.notifyObservers();
         }
-        console.log(this.currentArtistPromiseState);
 
     }
 
@@ -83,7 +82,6 @@ export default class Model {
         function notifyACB() {
             this.notifyObservers();
         }
-        console.log(this.currentTrackPromiseState);
     }
 
     setProfile() {
