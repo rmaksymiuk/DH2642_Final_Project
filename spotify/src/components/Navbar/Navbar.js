@@ -3,8 +3,6 @@ import { MenuItems } from './MenuItems';
 import './Navbar.css'
 import Button from '@mui/material/Button';
 import {Link, useMatch, useResolvedPath} from 'react-router-dom';
-import { ThemeProvider } from '@mui/material/styles';
-import {Theme} from "../../Theme.js"
 
 class Navbar extends React.Component {
     state = {clicked: false}
@@ -61,8 +59,6 @@ function logoutACB(){
 }
 
 function CustomLink({to, children, ...props}){
-    const resolvedPath = useResolvedPath(to)
-    const isActive = useMatch({path: resolvedPath.pathname, end: true})
     return(
         <Link to = {to} {...props}>
             {children}
