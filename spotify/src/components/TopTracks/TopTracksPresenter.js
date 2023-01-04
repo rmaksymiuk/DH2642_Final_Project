@@ -5,31 +5,29 @@ import {getTopTrack_assist} from '../../utilities.js';
 import promiseNoData from '../../promiseNoData';
 
 export default function TopTracks(props){
-    const [data, setData] = useState();
-    const [resi] = useState({promise: null, data: null, error: null})
-    const [page, setPage] = useState(0);
-    const [,reRender]= useState({});
+  const [page, setPage]=useState(0);  
+  const [promiseState] = useState({promise: null, data: null, error: null});
+  const [,reRender]= useState({});
 
-    useEffect(() => {
-      if (props.model.token) {
-            resolvePromise(getTopTrack_assist(0, props.model.token),resi, notifyACB);
-      }
-
-    }, []);
+   useEffect(() => {
+     if (props.model.token) {
+        resolvePromise(getTopTrack_assist(0, props.model.token), promiseState, notifyACB);
+    }
+   }, []);
 
     function notifyACB(){
         reRender({});
     }
 
     function getTopTrackACB(idx, token){
-        resolvePromise(getTopTrack_assist(idx, token), resi, notifyACB);
+        resolvePromise(getTopTrack_assist(idx, token), promiseState, notifyACB);
     }
 
     return (
         <div>
-            {promiseNoData(resi.promise, resi.data, resi.error)
-            ||<TopTracksView data = {resi.data} getTopTrack = {getTopTrackACB} token = {props.model.token}
-            page={page} pg={setPage}/>}
+            {promiseNoData(promiseState.promise, promiseState.data, promiseState.error)
+            ||<TopTracksView data = {promiseState.data} token = {props.model.token}
+            getTopTrack = {getTopTrackACB} page={page} pg={setPage}/>}
         </div>
     )
 }

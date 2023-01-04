@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import Navbar from "./components/Navbar/Navbar"
+import React from 'react'
+import Navbar from "./components/Navbar/NavbarPresenter"
 import './App.css';
 import TopTrack from './components/TopTracks/TopTracksPresenter';
 import TopArtist from './components/TopArtist/TopArtistPresenter';
@@ -8,7 +8,6 @@ import Listening from './components/Listening/ListeningPresenter';
 import Login from './components/LogIn/LogInPresenter';
 import {Route, Routes} from 'react-router-dom'
 import Main from './components/Main/MainView'
-import axios from "axios";
 import Logout from './components/LogOut/LogoutPresenter';
 import Model from "./Model.js"
 

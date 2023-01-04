@@ -19,7 +19,7 @@ export default function TopTracksView(props){
         return(
           <tr key={item.id}>
               <td>{index+1}</td>
-              <td><img src={item.album.images[2].url}/></td>
+              <td><img src={item.album.images[2].url} alt={"Image of "+item.album.name}/></td>
               <td>{item.name}</td>
               <td>{item.album.name}</td>
               <td>{item.artists[0].name}</td>
@@ -30,8 +30,9 @@ export default function TopTracksView(props){
     function tableCounter(number){
       <td>{number}</td>
     }
+    
    const size = Array.from({length: 20 }, (_, i) => i + 1)
-
+ 
     return (
       <>
         <div className="container">
