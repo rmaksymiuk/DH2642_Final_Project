@@ -4,6 +4,7 @@ import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
 import img2 from './components/Main/no image.jpeg';
+import {getTopArtist_assist, getTopTrack_assist} from './utilities.js';
 
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
@@ -14,11 +15,13 @@ const app = initializeApp(firebaseConfig);
 export default class Model {
     constructor() {
         if(localStorage.getItem("accessToken")) {
+            this.observers = [];
             this.setToken(localStorage.getItem("accessToken"));
+            this.currentArtistPromiseState={};
+            this.currentTrackPromiseState={};
             this.setArtists();
             this.setTracks();
             this.setProfile();
-            this.observers = [];
         }
     }
 
@@ -67,42 +70,20 @@ export default class Model {
     }
 
     setArtists() {
-        let promiseArtists;
-        axios.get(TOPARTIST_ENDPOINT+"?limit=20", {
-            headers: {
-                "Authorization": "Bearer " + this.token,
-                "Content-Type": "application/json"
-            },
-        })
-        .then((response) => {
-            promiseArtists = response.data.items
-            this.artists = response.data.items;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
+        resolvePromise(getTopArtist_assist(0, this.token),this.currentArtistPromiseState, notifyACB.bind(this));
+        function notifyACB() {
+            this.notifyObservers();
+        }
+        console.log(this.currentArtistPromiseState);
 
-        const payload = {arstistToSetProp: promiseArtists};
-        this.notifyObservers(payload);
     }
 
     setTracks() {
-        let promiseTracks;
-        axios.get(TOPTRACK_ENDPOINT+"?limit=20", {
-            headers: {
-                "Authorization": "Bearer " + this.token,
-                "Content-Type": "application/json"
-            },
-        })
-        .then((response) => {
-            promiseTracks = response.data.items;
-            this.tracks = response.data.items;
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-        const payload = {tracksToSetProp: promiseTracks};
-        this.notifyObservers(payload);
+        resolvePromise(getTopTrack_assist(0, this.token),this.currentTrackPromiseState, notifyACB.bind(this));
+        function notifyACB() {
+            this.notifyObservers();
+        }
+        console.log(this.currentTrackPromiseState);
     }
 
     setProfile() {

@@ -6,9 +6,20 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import "./Recommendations.css"
 import Typography from '@mui/material/Typography';
+import {getRecommendations_assist} from '../../utilities.js';
 import { ThemeProvider, createTheme } from '@mui/system';
+import React, { useEffect, useState } from "react";
 
 export default function RecommendationsView(props) {
+    const [data, setData] = useState({});
+
+    useEffect(()=>{
+      getRecommendations_assist(props.token, props.artists, props.tracks).then(saveDataACB);
+    },[]);
+
+   	function saveDataACB(result){
+        setData(result);
+	}
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
         <a target="_blank" style= {{textDecoration:'none'}} href={track.external_urls.spotify}>
@@ -39,7 +50,7 @@ export default function RecommendationsView(props) {
             justifyContent: 'center',
         }}>
             <List sx={{maxWidth: 800, width: '100%', }}>
-                {props.data?.tracks?props.data.tracks.map((track)=>{return findDetailsACB(track)}):null}
+                {data?.tracks?data.tracks.map((track)=>{return findDetailsACB(track)}):null}
             </List>
         </div>
       </>
