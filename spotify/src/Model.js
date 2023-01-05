@@ -56,9 +56,8 @@ export default class Model {
        
     }
 
-    setArtists(data) {
+    setArtists() {
         resolvePromise(getTopArtist_assist(0, this.token),this.currentArtistPromiseState, this.notifyObservers.bind(this));
-        data=this.currentArtistPromiseState;
     }
 
     setTracks() {

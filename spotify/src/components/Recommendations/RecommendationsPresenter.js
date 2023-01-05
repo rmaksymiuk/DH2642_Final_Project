@@ -7,13 +7,28 @@ import promiseNoData from '../../promiseNoData';
 export default function Recommendations(props){
     const [promiseState] = useState({promise: null, data: null, error: null})
     const [,reRender]= useState({});
+    const [artists, setArtists]=React.useState(props.model.currentArtistPromiseState.data);
+    const [tracks, setTracks]=React.useState(props.model.currentTrackPromiseState.data);
 
-    if (!promiseState.data){
-        props.model.setArtists();
+    function observerACB(){
+        setArtists(props.model.currentArtistPromiseState.data);
+        setTracks(props.model.currentTrackPromiseState.data);
+    }
+
+    function wasCreatedACB(){
+        props.model.addObserver(observerACB);
         console.log(props.model);
         console.log(props.model.currentArtistPromiseState.data);
-        console.log(props.model);
+         if (artists && tracks) {
+            resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
+        };
+        return function isTakenDownACB(){
+            props.model.removeObserver(observerACB);
+        };
     }
+
+    React.useEffect(wasCreatedACB, []);
+
 
     function notifyACB(){
         reRender({});
