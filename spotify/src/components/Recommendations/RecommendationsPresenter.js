@@ -13,10 +13,19 @@ export default function Recommendations(props){
     function observerACB(){
         setArtists(props.model.currentArtistPromiseState.data);
         setTracks(props.model.currentTrackPromiseState.data);
+        reRender();
+    }
+
+    function getRecommendationsACB() {
+        console.log(artists);
+         if (artists && tracks) {
+            resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
+        };
     }
 
     function wasCreatedACB(){
         props.model.addObserver(observerACB);
+        props.model.addObserver(getRecommendationsACB);
          if (artists && tracks) {
             resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
         };

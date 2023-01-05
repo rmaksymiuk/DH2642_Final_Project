@@ -11,10 +11,6 @@ import { ThemeProvider, createTheme } from '@mui/system';
 import React, { useEffect, useState } from "react";
 
 export default function RecommendationsView(props) {
-    useEffect(()=>{
-        console.log(props.data);
-    },[]);
-
     function findDetailsACB(track){
         return <div className="details" key={track.id}>
         <a target="_blank" style= {{textDecoration:'none'}} href={track.external_urls.spotify}>

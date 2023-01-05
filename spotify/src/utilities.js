@@ -30,7 +30,6 @@ export function getTopTrack_assist(idx, token) {
 };
 
 export function getRecommendations_assist(token, artists, tracks) {
-    console.log("recommending");
     return fetch(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+artists[0].id+","+artists[1].id+"&seed_tracks="+tracks[0].id+","+tracks[1].id+","+tracks[2].id, {
         headers: {
             "Authorization": "Bearer " + token,

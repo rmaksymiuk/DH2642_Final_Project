@@ -26,7 +26,6 @@ export default class Model {
 
     addObserver(callback){
         this.observers = [...this.observers, callback];
-        
     }
 
     removeObserver(callbackToRemove){
@@ -45,6 +44,7 @@ export default class Model {
             }  
         }
         this.observers.forEach(invokeObserverCB);
+        console.log("notifying observers");
     }
 
     setGenreAvg(avg) {
@@ -54,17 +54,17 @@ export default class Model {
     setToken(token) {
         this.token = token;
         const payload = {tokenToSetProp: token};
-        this.notifyObservers(payload);
        
     }
 
     setArtists() {
         resolvePromise(getTopArtist_assist(0, this.token),this.currentArtistPromiseState, this.notifyObservers.bind(this));
-        console.log(this.currentArtistPromiseState);
+        console.log("artists set");
     }
 
     setTracks() {
         resolvePromise(getTopTrack_assist(0, this.token),this.currentTrackPromiseState, this.notifyObservers.bind(this));
+        console.log("tracks set");
     }
 
     getArtists(){
