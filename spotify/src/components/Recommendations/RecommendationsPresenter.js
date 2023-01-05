@@ -17,8 +17,6 @@ export default function Recommendations(props){
 
     function wasCreatedACB(){
         props.model.addObserver(observerACB);
-        console.log(props.model);
-        console.log(props.model.currentArtistPromiseState.data);
          if (artists && tracks) {
             resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
         };

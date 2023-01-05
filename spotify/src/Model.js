@@ -19,6 +19,8 @@ export default class Model {
             this.setToken(localStorage.getItem("accessToken"));
             this.currentArtistPromiseState={};
             this.currentTrackPromiseState={};
+            this.setArtists();
+            this.setTracks();
         }
     }
 
@@ -58,6 +60,7 @@ export default class Model {
 
     setArtists() {
         resolvePromise(getTopArtist_assist(0, this.token),this.currentArtistPromiseState, this.notifyObservers.bind(this));
+        console.log(this.currentArtistPromiseState);
     }
 
     setTracks() {
