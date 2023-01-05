@@ -2,17 +2,18 @@ import RecommendationsView from "../Recommendations/RecommendationsView.js";
 import React, { useEffect, useState } from "react";
 import resolvePromise from '../../resolvePromise.js'
 import {getRecommendations_assist} from '../../utilities.js';
-import promiseNoData2 from '../../promiseNoData2';
+import promiseNoData from '../../promiseNoData';
 
 export default function Recommendations(props){
     const [promiseState] = useState({promise: null, data: null, error: null})
     const [,reRender]= useState({});
 
-    useEffect(() => {
-        if(props.model.currentTrackPromiseState.data && props.model.currentArtistPromiseState.data) {
-            resolvePromise(getRecommendations_assist(props.model.token, props.model.currentArtistPromiseState.data, props.model.currentTrackPromiseState.data),promiseState, notifyACB);
-        }
-    }, []);
+    if (!promiseState.data){
+        props.model.setArtists();
+        console.log(props.model);
+        console.log(props.model.currentArtistPromiseState.data);
+        console.log(props.model);
+    }
 
     function notifyACB(){
         reRender({});
@@ -20,8 +21,9 @@ export default function Recommendations(props){
 
     return (
         <div>
-            {promiseNoData2(props.model.currentArtistPromiseState, props.model.currentTrackPromiseState, promiseState)
-            }
+             {promiseNoData(promiseState.promise, promiseState.data, promiseState.error)
+            ||<RecommendationsView data={promiseState.data} token={props.model.token}
+                />}
         </div>
     )
 }

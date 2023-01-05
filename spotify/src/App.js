@@ -9,19 +9,17 @@ import Login from './components/LogIn/LogInPresenter';
 import {Route, Routes} from 'react-router-dom'
 import Main from './components/Main/MainView'
 import Logout from './components/LogOut/LogoutPresenter';
-import Model from "./Model.js"
 
-function App() {
-  const model = new Model();
+function App(props) {
   return (
     <div className="App">
         <Navbar />
         <Routes>
-            <Route path="*" element={<Main model = {model}/>}/>
-            <Route path="/topTracks" element={<TopTrack model = {model}/>}/>
-            <Route path="/topArtist" element={<TopArtist model = {model}/>}/>
-            <Route path="/recommendations" element={<Recommendations model = {model}/>}/>
-            <Route path="/listening" element={<Listening model = {model}/>}/>
+            <Route path="*" element={<Main model = {props.model}/>}/>
+            <Route path="/topTracks" element={<TopTrack model = {props.model}/>}/>
+            <Route path="/topArtist" element={<TopArtist model = {props.model}/>}/>
+            <Route path="/recommendations" element={<Recommendations model = {props.model}/>}/>
+            <Route path="/listening" element={<Listening model = {props.model}/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/logout" element={<Logout/>}/>
         </Routes>

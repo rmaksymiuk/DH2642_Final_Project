@@ -19,9 +19,6 @@ export default class Model {
             this.setToken(localStorage.getItem("accessToken"));
             this.currentArtistPromiseState={};
             this.currentTrackPromiseState={};
-            this.setArtists();
-            this.setTracks();
-            this.setProfile();
         }
     }
 
@@ -45,17 +42,7 @@ export default class Model {
                 console.error(err); 
             }  
         }
-        
-        if (this.observers) this.observers.forEach(invokeObserverCB);
-    }
-
-    getId() {
-        return this.userId;
-    }
-
-    getArtists()
-    {
-        return this.artists;
+        this.observers.forEach(invokeObserverCB);
     }
 
     setGenreAvg(avg) {
@@ -69,21 +56,22 @@ export default class Model {
        
     }
 
-    setArtists() {
-        resolvePromise(getTopArtist_assist(0, this.token),this.currentArtistPromiseState, notifyACB.bind(this));
-        function notifyACB() {
-            this.notifyObservers();
-        }
-
+    setArtists(data) {
+        resolvePromise(getTopArtist_assist(0, this.token),this.currentArtistPromiseState, this.notifyObservers.bind(this));
+        data=this.currentArtistPromiseState;
     }
 
     setTracks() {
-        resolvePromise(getTopTrack_assist(0, this.token),this.currentTrackPromiseState, notifyACB.bind(this));
-        function notifyACB() {
-            this.notifyObservers();
-        }
+        resolvePromise(getTopTrack_assist(0, this.token),this.currentTrackPromiseState, this.notifyObservers.bind(this));
     }
 
+    getArtists(){
+        return this.currentArtistPromiseState.data;
+    }
+
+    getTracks(){
+        return this.currentTrackPromiseState;
+    }
     setProfile() {
         axios
           .get(MAIN_ENDPOINT, {
