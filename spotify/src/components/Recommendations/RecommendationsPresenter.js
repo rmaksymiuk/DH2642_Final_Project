@@ -10,22 +10,22 @@ export default function Recommendations(props){
     const [artists, setArtists]=React.useState(props.model.currentArtistPromiseState.data);
     const [tracks, setTracks]=React.useState(props.model.currentTrackPromiseState.data);
 
+    
+    React.useEffect(wasCreatedACB, []);
+
+    if (!promiseState.promise&&artists&&tracks)
+        resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
+    
     function observerACB(){
         setArtists(props.model.currentArtistPromiseState.data);
         setTracks(props.model.currentTrackPromiseState.data);
-        reRender();
-    }
-
-    function getRecommendationsACB() {
-        console.log(artists);
-         if (artists && tracks) {
+        if (artists && tracks) {
             resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
         };
     }
 
     function wasCreatedACB(){
         props.model.addObserver(observerACB);
-        props.model.addObserver(getRecommendationsACB);
          if (artists && tracks) {
             resolvePromise(getRecommendations_assist(props.model.token, artists, tracks),promiseState, notifyACB);
         };
@@ -33,9 +33,6 @@ export default function Recommendations(props){
             props.model.removeObserver(observerACB);
         };
     }
-
-    React.useEffect(wasCreatedACB, []);
-
 
     function notifyACB(){
         reRender({});
