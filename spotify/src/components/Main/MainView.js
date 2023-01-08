@@ -1,43 +1,20 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import './Main.css';
 import img from "./spotify logo.png";
 import img2 from './no image.jpeg';
-import { getDatabase, ref, onValue } from "firebase/database";
-const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
 
-export default function Main(props){
-    const [name, setName] = useState("");
-    const [image, setImage] = useState("");
-
-    useEffect(() => {
-      if (props.model.token) {
-        const db = getDatabase();
-        const nameRef = ref(db, 'users/' + props.model.userId + '/name');
-        const imgRef = ref(db, 'users/' + props.model.userId + '/profileUrl');
-        onValue(nameRef, (snapshot) => {
-            const data = snapshot.val();
-            setName(data);
-        });
-        onValue(imgRef, (snapshot) => {
-            const data = snapshot.val();
-            setImage(data);
-        });
-    }
-    }, []);
-
-    return (
-      <div className="container">
+export default function MainView(props){
+  return (
+    <div className="container">
         <div className="profiles">
             <div className="animate__animated animate__pulse animate__slower animate__infinite">
-                {props.model.token&&name?
-                    <div className="message">{"HI! "+ (name?name:"")}</div>
+                {props.token&&props.data?.display_name?
+                    <div className="message">{"HI! "+ (props.data?.display_name?props.data?.display_name:"")}</div>
                     :<div className="message">Welcome to Trackify!</div>}
             </div>
-            {props.model.token&&image?
-                <a target="_blank" rel="noreferrer"><img className="user" src={image} alt="User Profile"/></a>
+            {props.token&&props.data?.images?
+                <a target="_blank" rel="noreferrer" href={props.data.external_urls.spotify}><img className="user" src={props.data?.images[0]?.url? props.data.images[0].url: img2} alt="User Profile"/></a>
                 :<img className="logo" src={img} alt="spotify logo"/>}
-            <div className={props.model.token?"explain2": "explain"}>
+            <div className={props.token?"explain2": "explain"}>
               <div className="att">ATTENTION!</div>
               <br/>
               &nbsp;We used 'Spotify API' for our project, but our app is in 'Development mode'. So, only users are on our allowlist can use our app.
@@ -54,5 +31,5 @@ export default function Main(props){
             </div>
       </div>
     </div>
-    );
-};
+  );
+}

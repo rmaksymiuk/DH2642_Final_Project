@@ -7,7 +7,7 @@ import Recommendations from './components/Recommendations/RecommendationsPresent
 import Listening from './components/Listening/ListeningPresenter';
 import Login from './components/LogIn/LogInPresenter';
 import {Route, Routes} from 'react-router-dom'
-import Main from './components/Main/MainView'
+import Main from './components/Main/MainPresenter'
 import Logout from './components/LogOut/LogoutPresenter';
 
 function App(props) {

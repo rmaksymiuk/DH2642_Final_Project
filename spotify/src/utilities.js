@@ -2,6 +2,7 @@ const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
 const timeRange=["short_term", "medium_term", "long_term"];
 const RECOMMENDATIONS_ENDPOINT="https://api.spotify.com/v1/recommendations";
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
+const MAIN_ENDPOINT="https://api.spotify.com/v1/me";
 
 export function getTopArtist_assist(idx, token) {
     return fetch(TOPARTIST_ENDPOINT+"?time_range="+timeRange[idx]+"&limit=20", {
@@ -55,3 +56,18 @@ export function getRecommendations_assist(token, artists, tracks) {
         return response.json();
     })
 };
+
+export function getProfiles(Token, setData) {
+    return fetch(MAIN_ENDPOINT, {
+        headers: {
+          "Authorization": "Bearer " + Token,
+          "Content-Type": "application/json"
+        },
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response)=>{
+        setData(response);
+      })
+  };
