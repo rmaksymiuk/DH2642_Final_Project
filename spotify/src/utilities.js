@@ -30,7 +30,22 @@ export function getTopTrack_assist(idx, token) {
 };
 
 export function getRecommendations_assist(token, artists, tracks) {
-    return fetch(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+artists[0].id+","+artists[1].id+"&seed_tracks="+tracks[0].id+","+tracks[1].id+","+tracks[2].id, {
+    const N1=artists.length>=2?2:artists.length;
+    const N2=tracks.length>=3?3:tracks.length;
+    let tadress1="";
+    let tadress2="";
+    
+    for (let i=0;i<N1;i++){
+        tadress1+=artists[i].id;
+        if (i!==N1-1)
+            tadress1+=",";
+    }
+    for (let i=0;i<N2;i++){
+        tadress2+=tracks[i].id;
+        if (i!==N2-1)
+            tadress2+=",";
+    }    
+    return fetch(RECOMMENDATIONS_ENDPOINT+"?seed_artists="+tadress1+"&seed_tracks="+tadress2, {
         headers: {
             "Authorization": "Bearer " + token,
             "Content-Type": "application/json"
