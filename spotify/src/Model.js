@@ -21,6 +21,7 @@ export default class Model {
             this.currentTrackPromiseState={};
             this.setArtists();
             this.setTracks();
+            this.setProfile(this.token);
         }
     }
 
@@ -72,11 +73,11 @@ export default class Model {
     getTracks(){
         return this.currentTrackPromiseState;
     }
-    setProfile() {
+    setProfile(token) {
         axios
           .get(MAIN_ENDPOINT, {
             headers: {
-              "Authorization": "Bearer " + this.token,
+              "Authorization": "Bearer " + token,
               "Content-Type": "application/json"
             },
           })
@@ -88,7 +89,7 @@ export default class Model {
             this.profile.id = this.profile.id.replace('[','');
             this.profile.id = this.profile.id.replace(']','');
             if(this.profile.images[0]) {
-                this.setUserData(this.profile.id, this.profile.display_name, this.profile.images[0].url);
+                this.setUserData(this.profile.id, this.profile.display_name, this.profile?.images[0].url);
             } else {
                 this.setUserData(this.profile.id, this.profile.display_name, img2);
             }

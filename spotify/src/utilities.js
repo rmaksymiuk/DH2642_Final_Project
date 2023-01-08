@@ -66,8 +66,5 @@ export function getProfiles(Token, setData) {
       })
       .then((response) => {
         return response.json();
-      })
-      .then((response)=>{
-        setData(response);
-      })
+      });
   };
