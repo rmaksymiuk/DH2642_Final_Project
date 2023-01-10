@@ -19,6 +19,8 @@ export default class Model {
             this.setToken(localStorage.getItem("accessToken"));
             this.currentArtistPromiseState={};
             this.currentTrackPromiseState={};
+            this.avgPopularity = 0;
+            this.totalGenres = 0;
             this.setArtists();
             this.setTracks();
             this.setProfile(this.token);
@@ -46,6 +48,17 @@ export default class Model {
         }
         this.observers.forEach(invokeObserverCB);
     }
+
+    setAvgPopularity(popularity) {
+        this.avgPopularity = popularity;
+        const payload = {"setAvgPopularity" : popularity};
+    }
+
+    setTotalGenres(genres) {
+        this.totalGenres = genres;
+        const payload = {"setTotalGenres" : genres};
+    }
+
 
     setToken(token) {
         this.token = token;

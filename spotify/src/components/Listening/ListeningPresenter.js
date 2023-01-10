@@ -32,7 +32,6 @@ export default function Listening(props) {
             getTopGenresACB();
             getAverageYearACB();
         };
-        reRender({});
     }
 
     function wasCreatedACB(){
@@ -77,6 +76,8 @@ export default function Listening(props) {
         onValue(genresRef, (snapshot) => {
             const data = snapshot.val();
         });
+        props.model.setTotalGenres(outputArray.length)
+
     }
 
 
@@ -86,6 +87,7 @@ export default function Listening(props) {
         const average = Math.floor(sum / avgPopularity.length);
         setAvgPopularity(average);
         const db = getDatabase();
+        props.model.setAvgPopularity(average);
     }
 
     function getTopGenresACB() {
