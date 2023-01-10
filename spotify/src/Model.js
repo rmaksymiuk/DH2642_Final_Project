@@ -45,17 +45,12 @@ export default class Model {
             }  
         }
         this.observers.forEach(invokeObserverCB);
-        console.log("notifying observers");
-    }
-
-    setGenreAvg(avg) {
-        this.genreAvg = avg;
     }
 
     setToken(token) {
         this.token = token;
-        const payload = {tokenToSetProp: token};
-       
+        const payload = {"setToken" : token};
+        this.notifyObservers(payload);
     }
 
     setArtists() {
@@ -73,6 +68,7 @@ export default class Model {
     getTracks(){
         return this.currentTrackPromiseState;
     }
+
     setProfile(token) {
         axios
           .get(MAIN_ENDPOINT, {

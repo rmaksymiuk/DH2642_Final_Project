@@ -7,6 +7,11 @@ import React, { useEffect, useState } from "react";
 import { getDatabase, ref, push, onValue, set } from "firebase/database";
 
 export default function Listening(props) {
+    const [promiseState] = useState({promise: null, data: null, error: null})
+    const [,reRender]= useState({});
+    const [artists, setArtists]=React.useState(props.model.currentArtistPromiseState.data);
+    const [tracks, setTracks]=React.useState(props.model.currentTrackPromiseState.data);
+
     const [numGenres, setNumGenres] = useState();
     const [averagePop, setAveragePop] = useState();
     const [averageGenres, setAverageGenres] = useState();
@@ -15,6 +20,37 @@ export default function Listening(props) {
     const [topYearPopularity, setTopYearPopularity] = useState();
     const [page, setPage] = useState(0);
     const pages = ["Popularity", "Total Genres", "Top Genres", "Top Years"];
+
+    React.useEffect(wasCreatedACB, []);
+
+    function observerACB(){
+        setArtists(props.model.currentArtistPromiseState.data);
+        setTracks(props.model.currentTrackPromiseState.data);
+        if (artists && tracks) {
+            getNumGenresACB();
+            getAveragePopularityACB();
+            getTopGenresACB();
+            getAverageYearACB();
+        };
+        reRender({});
+    }
+
+    function wasCreatedACB(){
+        props.model.addObserver(observerACB);
+         if (artists && tracks) {
+            getNumGenresACB();
+            getAveragePopularityACB();
+            getTopGenresACB();
+            getAverageYearACB();
+         };
+        return function isTakenDownACB(){
+            props.model.removeObserver(observerACB);
+        };
+    }
+
+    function notifyACB(){
+        reRender({});
+    }
 
     function getArtistGenreACB(artist) {
         return artist.genres;
@@ -29,7 +65,7 @@ export default function Listening(props) {
     }
 
     function getNumGenresACB() {
-        const genres2d = props.model.artists.map(getArtistGenreACB);
+        const genres2d = artists.map(getArtistGenreACB);
         const genres1d = [].concat(...genres2d);
         let outputArray = genres1d.filter(function(v, i, self)
                 {
@@ -37,7 +73,6 @@ export default function Listening(props) {
                 });
         setNumGenres(outputArray.length);
         const db = getDatabase();
-        setAverageGenres(45);
         const genresRef = ref(db, 'averageGenres');
         onValue(genresRef, (snapshot) => {
             const data = snapshot.val();
@@ -46,8 +81,7 @@ export default function Listening(props) {
 
 
     function getAveragePopularityACB() {
-        const avgPopularity = props.model.artists.map(getArtistPopularityACB);
-        setAveragePop(75.3);
+        const avgPopularity = artists.map(getArtistPopularityACB);
         const sum = avgPopularity.reduce((acc, val) => acc + val, 0);
         const average = Math.floor(sum / avgPopularity.length);
         setAvgPopularity(average);
@@ -55,7 +89,7 @@ export default function Listening(props) {
     }
 
     function getTopGenresACB() {
-        const genres = props.model.artists.map(getArtistGenreACB);
+        const genres = artists.map(getArtistGenreACB);
 
         const counts = genres.reduce((counts, array) => {
             for (const element of array) {
@@ -76,7 +110,7 @@ export default function Listening(props) {
     }
 
     function getAverageYearACB() {
-        const dates = props?.model.tracks.map(getDateACB);
+        const dates = tracks.map(getDateACB);
         const years = dates.map(date => (date.substring(0,4)));
         
         const count = years.reduce((accumulator, current) => {
@@ -97,25 +131,6 @@ export default function Listening(props) {
 
     function pageChangeACB(pg){
       setPage(pg);
-    }
-
-    function componentWasCreatedACB(){
-        if(props.model.artists) {
-            getNumGenresACB();
-            getAveragePopularityACB();
-            getTopGenresACB();
-            getAverageYearACB();
-        }
-    }
-    React.useEffect(componentWasCreatedACB, [] );
-
-    if(!numGenres && !avgPopularity && !topGenres && !topYearPopularity) {
-        setNumGenres(5);
-        setAvgPopularity(49);
-        setTopGenres([['post-teen pop',7], ['pop',4], ['dance pop',3]]);
-        setTopYearPopularity([[2003,14], [2004,2], [2005,1]]);
-        setAverageGenres(45);
-        setAveragePop(75.3);
     }
 
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
