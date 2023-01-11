@@ -3,7 +3,7 @@ import { firebaseConfig } from "./FirebaseConfig.js";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, onValue } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
-import img2 from './components/Main/no image.jpeg';
+import img2 from './components/Main/image/no image.jpeg';
 import {getTopArtist_assist, getTopTrack_assist} from './utilities.js';
 import {observerRecap, updateFirebaseFromModel} from "./FirebaseModel.js"
 

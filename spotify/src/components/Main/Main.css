@@ -1,5 +1,7 @@
 .container{
     height: 100%;
+    display: flex;
+    flex-direction : column;
 }
 
 .profiles{
@@ -7,7 +9,7 @@
     display:flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 10px;
+    margin: 10px 0px;
     align-items: center;
 }
 
@@ -31,4 +33,41 @@
     width: 300px !important;
     height: 300px !important;
     margin-top: 20px;
+}
+
+.mainimg{
+    width: 70px !important;
+    height: 70px !important;
+}
+
+.specific{
+    margin-left: 20px;
+}
+
+.logy{
+    display: flex;
+    flex-direction: row;
+    margin: 30px 0px;
+    align-items: center;
+}
+
+.logy2{
+    margin-top: 40px;
+}
+
+.logy3{
+    margin-bottom: 80px;
+}
+.tit{
+    font: 22px bold;
+    margin-bottom: 10px;
+}
+.titexp{
+    font-size: 17px !important;
+    width: 700px;
+}
+
+.funcexp{
+    justify-content: center;
+    align-items: center;
 }
