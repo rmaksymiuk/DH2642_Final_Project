@@ -71,13 +71,9 @@ export default function Listening(props) {
                     return i == self.indexOf(v);
                 });
         setNumGenres(outputArray.length);
-        const db = getDatabase();
-        const genresRef = ref(db, 'averageGenres');
-        onValue(genresRef, (snapshot) => {
-            const data = snapshot.val();
-        });
-        props.model.setTotalGenres(outputArray.length)
-
+        if(outputArray.length != props.model.totalGenres) {
+            props.model.setTotalGenres(outputArray.length);
+        }
     }
 
 
@@ -87,7 +83,9 @@ export default function Listening(props) {
         const average = Math.floor(sum / avgPopularity.length);
         setAvgPopularity(average);
         const db = getDatabase();
-        props.model.setAvgPopularity(average);
+        if(props.model.avgPopularity != average) {
+            props.model.setAvgPopularity(average);
+        }
     }
 
     function getTopGenresACB() {
