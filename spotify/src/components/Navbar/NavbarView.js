@@ -1,7 +1,7 @@
 import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom';
 import SelectMenuView from './SelectMenuView.js';
-
+import './Navbar.css'
 export default function NavbarView(props){
     function loginhandleACB(){
         props.login();
@@ -17,8 +17,8 @@ export default function NavbarView(props){
             </div>
             <SelectMenuView token={localStorage.getItem('accessToken')} class={props.clicked ? 'nav-menu active' : 'nav-menu'}/>
             {localStorage.getItem('accessToken')
-            ?<Button color="success" onClick= {logouthandleACB} size="small" variant="contained">Log Out</Button>
-            :<Button color="success" onClick = {loginhandleACB} size="small" variant="contained">Log In</Button>}
+            ?<Button className="log" color="success" onClick= {logouthandleACB} size="small" variant="contained">Log Out</Button>
+            :<Button className="log" color="success" onClick = {loginhandleACB} size="small" variant="contained">Log In</Button>}
         </nav>
     );
 }

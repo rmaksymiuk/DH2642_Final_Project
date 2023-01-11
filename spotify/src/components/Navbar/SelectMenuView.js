@@ -27,5 +27,16 @@ export default function SelectMenuView(props){
                 </CustomLink>
             </li>)})
         }
+        {props.token
+        ?<li key = {4}>
+        <CustomLink  className='nav-links-mobile' to ='/logout' >
+            Log Out
+        </CustomLink>
+        </li>
+        :<li key = {5}>
+        <CustomLink  className='nav-links-mobile' to ='/login' >
+            Log In
+        </CustomLink>
+        </li>}
     </div>);
 }
