@@ -80,7 +80,6 @@ export default function Listening(props) {
 
     }
 
-
     function getAveragePopularityACB() {
         const avgPopularity = artists.map(getArtistPopularityACB);
         const sum = avgPopularity.reduce((acc, val) => acc + val, 0);
@@ -135,12 +134,19 @@ export default function Listening(props) {
       setPage(pg);
     }
 
+    if (artists&&tracks&&!numGenres&&!avgPopularity&&!topGenres&&!topYearPopularity) {
+        getNumGenresACB();
+        getAveragePopularityACB();
+        getTopGenresACB();
+        getAverageYearACB();
+    };
+
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
-    if(page == 0) {
+    if(page === 0) {
         component = <AvgPopularityView averagePop = {averagePop} popularity = {avgPopularity}/>;
-    } else if(page == 1) {
+    } else if(page === 1) {
         component = <TotalGenresView avgGenres = {averageGenres} genres = {numGenres}/>;
-    } else if(page == 2) {
+    } else if(page === 2) {
         component = <TopGenreView topGenres = {topGenres}/>
     }
 
