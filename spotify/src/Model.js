@@ -5,6 +5,7 @@ import { getDatabase, ref, set, onValue } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
 import img2 from './components/Main/no image.jpeg';
 import {getTopArtist_assist, getTopTrack_assist} from './utilities.js';
+import {observerRecap, updateFirebaseFromModel} from "./FirebaseModel.js"
 
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
@@ -24,6 +25,7 @@ export default class Model {
             this.setArtists();
             this.setTracks();
             this.setProfile(this.token);
+            updateFirebaseFromModel(this);
         }
     }
 
@@ -52,11 +54,13 @@ export default class Model {
     setAvgPopularity(popularity) {
         this.avgPopularity = popularity;
         const payload = {"setAvgPopularity" : popularity};
+        this.notifyObservers(payload);
     }
 
     setTotalGenres(genres) {
         this.totalGenres = genres;
         const payload = {"setTotalGenres" : genres};
+        this.notifyObservers(payload);
     }
 
 
