@@ -19,10 +19,10 @@ export default function TopTracksView(props){
         return(
           <tr key={item.id}>
               <td>{index+1}</td>
-              <td><img src={item.album.images[2].url} alt={"Image of "+item.album.name}/></td>
-              <td>{item.name}</td>
-              <td>{item.album.name}</td>
-              <td>{item.artists[0].name}</td>
+              <td><a target="_blank" href={item.album.external_urls.spotify}><img src={item.album.images[2].url} alt={"Image of "+item.album.name}/></a></td>
+              <td><a target="_blank" href={item.external_urls.spotify}>{item.name}</a></td>
+              <td><a target="_blank" href={item.album.external_urls.spotify}>{item.album.name}</a></td>
+              <td><a target="_blank" href={item.artists[0].external_urls.spotify}>{item.artists[0].name}</a></td>
           </tr>
         );
     };

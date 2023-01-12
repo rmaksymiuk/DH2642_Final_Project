@@ -104,5 +104,7 @@
 .tableStyle tbody tr:last-of-type {
     border-bottom: 2px solid #1DB954;
 }
-
-
+a {
+  color: black;
+  text-decoration: none; /* no underline */
+}
