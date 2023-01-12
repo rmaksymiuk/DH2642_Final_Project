@@ -36,7 +36,7 @@ export default function TopTracksView(props){
     return (
       <>
         <div className="container">
-          <h1 className="title">{"Top Tracks ("+pageName[page]+")"}</h1>
+          <h1 className="title">{"Your Top Tracks ("+pageName[page]+")"}</h1>
           <div className="menu">
               <ul className="tabs">
                  <li className={page===0?'is_active':''} onClick = {() => pageChangeACB(0)}>{pageName[0]}</li>
