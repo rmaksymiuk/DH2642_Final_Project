@@ -5,7 +5,7 @@ import { getDatabase, ref, set, onValue } from "firebase/database";
 import resolvePromise from "./resolvePromise.js"
 import img2 from './components/Main/image/no image.jpeg';
 import {getTopArtist_assist, getTopTrack_assist} from './utilities.js';
-import {observerRecap, updateFirebaseFromModel} from "./FirebaseModel.js"
+import {observerRecap, updateFirebaseFromModel, updateModelFromFirebase} from "./FirebaseModel.js"
 
 const TOPTRACK_ENDPOINT="https://api.spotify.com/v1/me/top/tracks";
 const TOPARTIST_ENDPOINT="https://api.spotify.com/v1/me/top/artists";
@@ -20,12 +20,12 @@ export default class Model {
             this.setToken(localStorage.getItem("accessToken"));
             this.currentArtistPromiseState={};
             this.currentTrackPromiseState={};
-            this.avgPopularity = 0;
-            this.totalGenres = 0;
+            this.profile={};
             this.setArtists();
             this.setTracks();
             this.setProfile(this.token);
             updateFirebaseFromModel(this);
+            updateModelFromFirebase(this);
         }
     }
 
@@ -41,28 +41,56 @@ export default class Model {
     }
 
     notifyObservers(payload){
-        function invokeObserverCB(obs){ 
+        function invokeObserverCB(obs){
             try{
                 obs(payload)
             } catch(err){
-                console.error(err); 
-            }  
+                console.error(err);
+            }
         }
         this.observers.forEach(invokeObserverCB);
     }
 
+    setTotalPopularity(popularity) {
+        this.totalUserPopularities = popularity;
+        const payload = {"setTotalPopularity" : popularity};
+        this.notifyObservers(payload);
+    }
+
+    setTotalUserGenres(genres) {
+        this.totalUserGenres = genres;
+        const payload = {"setTotalUserGenres" : genres};
+        this.notifyObservers(payload);
+    }
+
+
     setAvgPopularity(popularity) {
-        this.avgPopularity = popularity;
+        this.profile.avgPopularity = popularity;
         const payload = {"setAvgPopularity" : popularity};
         this.notifyObservers(payload);
     }
 
     setTotalGenres(genres) {
-        this.totalGenres = genres;
+        this.profile.totalGenres = genres;
         const payload = {"setTotalGenres" : genres};
         this.notifyObservers(payload);
     }
 
+    setTotalAvgPop(average) {
+        if(average != null) {
+            this.totalUserAvgPop = average;
+            const payload = {"setTotalAvgPop" : average};
+            this.notifyObservers(payload);
+        }
+    }
+
+    setTotalUsers(users) {
+        if(users != null) {
+            this.totalUsers = users;
+            const payload = {"setTotalUsers" : users};
+            this.notifyObservers(payload);
+        }
+    }
 
     setToken(token) {
         this.token = token;

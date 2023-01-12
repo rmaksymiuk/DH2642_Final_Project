@@ -11,13 +11,16 @@ export default function Listening(props) {
     const [,reRender]= useState({});
     const [artists, setArtists]=React.useState(props.model.currentArtistPromiseState.data);
     const [tracks, setTracks]=React.useState(props.model.currentTrackPromiseState.data);
+    const[totalUserPopularities, setTotalUserPopularities] = React.useState(props.model.totalUserPopularities);
+    const[totalUsers, setTotalUsers] = React.useState(props.model.totalUsers);
+    const[totalUserGenres, setTotalUserGenres] = React.useState(props.model.totalUserGenres);
 
     const [numGenres, setNumGenres] = useState();
-    const [averagePop, setAveragePop] = useState();
     const [averageGenres, setAverageGenres] = useState();
     const [avgPopularity, setAvgPopularity] = useState();
     const [topGenres, setTopGenres] =  useState();
     const [topYearPopularity, setTopYearPopularity] = useState();
+    const [totalUserAvgPop, setTotalUserAvgPop] = useState();
     const [page, setPage] = useState(0);
     const pages = ["Popularity", "Total Genres", "Top Genres", "Top Years"];
 
@@ -26,12 +29,18 @@ export default function Listening(props) {
     function observerACB(){
         setArtists(props.model.currentArtistPromiseState.data);
         setTracks(props.model.currentTrackPromiseState.data);
+        setTotalUserPopularities(props.model.totalUserPopularities);
+        setTotalUsers(props.model.totalUsers);
         if (artists && tracks) {
             getNumGenresACB();
             getAveragePopularityACB();
             getTopGenresACB();
             getAverageYearACB();
         };
+         if(totalUserPopularities && totalUserGenres && totalUsers) {
+            getUsersAvgPopACB();
+            getUsersGenresACB();
+         }
     }
 
     function wasCreatedACB(){
@@ -42,6 +51,10 @@ export default function Listening(props) {
             getTopGenresACB();
             getAverageYearACB();
          };
+         if(totalUserPopularities && totalUserGenres && totalUsers) {
+            getUsersAvgPopACB();
+            getUsersGenresACB();
+         }
         return function isTakenDownACB(){
             props.model.removeObserver(observerACB);
         };
@@ -71,9 +84,15 @@ export default function Listening(props) {
                     return i == self.indexOf(v);
                 });
         setNumGenres(outputArray.length);
-        if(outputArray.length != props.model.totalGenres) {
+        if(outputArray.length != props.model.profile.totalGenres) {
             props.model.setTotalGenres(outputArray.length);
         }
+    }
+
+    function getUsersGenresACB() {
+        const genreSum = totalUserGenres;
+        const users = totalUsers;
+        setAverageGenres(Math.round(genreSum/users));
     }
 
     function getAveragePopularityACB() {
@@ -82,9 +101,15 @@ export default function Listening(props) {
         const average = Math.floor(sum / avgPopularity.length);
         setAvgPopularity(average);
         const db = getDatabase();
-        if(props.model.avgPopularity != average) {
+        if(props.model.profile.avgPopularity != average) {
             props.model.setAvgPopularity(average);
         }
+    }
+
+    function getUsersAvgPopACB() {
+        const popSum = totalUserPopularities;
+        const users = totalUsers;
+        setTotalUserAvgPop(Math.round(popSum/users));
     }
 
     function getTopGenresACB() {
@@ -100,7 +125,7 @@ export default function Listening(props) {
             }
             return counts;
           }, {});
-        
+
           const topThree = Object.entries(counts)
           .sort((a, b) => b[1] - a[1])
           .slice(0, 3);
@@ -111,7 +136,7 @@ export default function Listening(props) {
     function getAverageYearACB() {
         const dates = tracks.map(getDateACB);
         const years = dates.map(date => (date.substring(0,4)));
-        
+
         const count = years.reduce((accumulator, current) => {
             if (accumulator[current]) {
               accumulator[current]++;
@@ -120,7 +145,7 @@ export default function Listening(props) {
             }
             return accumulator;
           }, {});
-        
+
         const topThree = Object.entries(count)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 3);
@@ -141,7 +166,7 @@ export default function Listening(props) {
 
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
     if(page === 0) {
-        component = <AvgPopularityView averagePop = {averagePop} popularity = {avgPopularity}/>;
+        component = <AvgPopularityView popularity = {avgPopularity} average = {totalUserAvgPop}/>;
     } else if(page === 1) {
         component = <TotalGenresView avgGenres = {averageGenres} genres = {numGenres}/>;
     } else if(page === 2) {
