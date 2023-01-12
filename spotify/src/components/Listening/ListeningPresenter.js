@@ -190,8 +190,9 @@ export default function Listening(props) {
         component = <TopGenreView topGenres = {topGenres}/>
     }
 
-    return <div className = "page">
-          <div className="menu">
+    return <div className = "pages">
+          <div className="menus">
+              <h1 className="titles">Listening</h1>
               <ul className="tabs">
                  <li className={page===0?'is_active':''} onClick = {() => pageChangeACB(0)}>{pages[0]}</li>
                  <li className={page===1?'is_active':''} onClick = {() => pageChangeACB(1)}>{pages[1]}</li>
@@ -199,6 +200,6 @@ export default function Listening(props) {
                  <li className={page===3?'is_active':''} onClick = {() => pageChangeACB(3)}>{pages[3]}</li>
               </ul>
           </div>
-          {component}
+          <div className="compo">{component}</div>
     </div>;
 }
