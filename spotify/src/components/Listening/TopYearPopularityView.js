@@ -13,7 +13,7 @@ export default function AvgYear(props){
     return (
         <div>
             <div className = "introText">
-                You have found yourself listening to the most music from the years:
+                You have found yourself listening to the most music from the years
             </div>
             
             <ul className="number">
