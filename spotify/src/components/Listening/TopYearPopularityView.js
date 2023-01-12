@@ -17,7 +17,7 @@ export default function AvgYear(props){
             </div>
             
             <ul className="number">
-                {props?.topYears?.map(yearACB)}
+                <b>{props?.topYears?.map(yearACB)}</b>
             </ul>   
         </div>
         

@@ -5,7 +5,7 @@ export default function TotalGenresView(props){
             You listened to a total of
         </div>
         <div className = "number">
-            {props.genres}
+            <b>{props.genres}</b>
         </div>
         <div className = "introText">
             Genres this past year!
@@ -14,7 +14,11 @@ export default function TotalGenresView(props){
             The average number of genres listened to by our users is
         </div>
         <div className = "number">
-            {props.avgGenres}
+            <b>{props.avgGenres}</b>
+        </div>
+        <br></br><br></br>
+        <div className = "personalizedMessage">
+            <b><i>{props.message}</i></b>
         </div>
     </div>
        

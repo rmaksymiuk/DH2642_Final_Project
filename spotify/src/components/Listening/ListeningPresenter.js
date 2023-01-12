@@ -175,7 +175,17 @@ export default function Listening(props) {
         }
         component = <AvgPopularityView popularity = {avgPopularity} average = {totalUserAvgPop} message = {message}/>;
     } else if(page === 1) {
-        component = <TotalGenresView avgGenres = {averageGenres} genres = {numGenres}/>;
+        let message = "";
+        if(numGenres < 5) {
+            message = "Try exploring more of the world of music, there are over 1,500 genres out there to dive into! May I suggest something like Ethiopian jazz or indie rock?"
+        } else if(numGenres < averageGenres) {
+            message = "You listen to less genres than the average user, try exploring our recommendations to expand your exposure to different genres!"
+        } else if(numGenres < averageGenres + 10) {
+            message = "You listen to just about the same number of genres as the average user, there's nothing wrong with being average!"
+        } else {
+            message = "Wow! You must have a very diverse music library, keep exploring the wonderful world of music"
+        }
+        component = <TotalGenresView avgGenres = {averageGenres} genres = {numGenres} message = {message}/>;
     } else if(page === 2) {
         component = <TopGenreView topGenres = {topGenres}/>
     }

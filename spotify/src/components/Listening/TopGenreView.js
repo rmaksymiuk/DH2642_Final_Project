@@ -15,7 +15,7 @@ export default function TopGenre(props){
         </div>
         
         <div className="number">
-            {props?.topGenres?.map(genreNameACB)}
+            <b>{props?.topGenres?.map(genreNameACB)}</b>
         </div>
     </div>
     );
