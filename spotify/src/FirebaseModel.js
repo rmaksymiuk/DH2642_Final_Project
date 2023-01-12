@@ -6,8 +6,6 @@ import { getDatabase, ref, set, onValue } from "firebase/database";
 
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-const referencePop = ref(db, "/avgPopularity");
-const referenceGen = ref(db, "/totalGenres");
 
 export function observerRecap(model) {
     model.addObserver(function paramACB(payload){console.log(payload);});
@@ -18,14 +16,18 @@ export function updateFirebaseFromModel(model) {
         if (!payload)
             return;
         if(payload.setAvgPopularity !== undefined) {
-            set(referencePop, model.avgPopularity);
+            if(model.profile.id) {
+                console.log(model.profile.id);
+                set(ref(db, "users/" + model.profile.id + "/avgPopularity"), model.profile.avgPopularity);
+            }
        }
         if(payload.setTotalGenres !== undefined) {
-            set(referenceGen, model.totalGenres);
+            if(model.profile.id) {
+                console.log(model.profile.id);
+                set(ref(db, "users/" + model.profile.id + "/totalGenres"), model.profile.totalGenres);
+            }
        }
     }
     model.addObserver(addFirebaseACB);
     return;
 }
-
-
