@@ -13,23 +13,32 @@ export function observerRecap(model) {
 
 export function updateFirebaseFromModel(model) {
     function addFirebaseACB(payload) {
-    console.log(model);
         if (!payload)
             return;
         if(payload.setAvgPopularity !== undefined) {
             if(model.profile.id) {
-                set(ref(db, "users/" + model.profile.id + "/avgPopularity"), model.profile.avgPopularity);
+                set(ref(db, "/avgPopularity"), model.profile.avgPopularity);
             }
        }
        if(payload.setTotalGenres !== undefined) {
             if(model.profile.id) {
-                set(ref(db, "users/" + model.profile.id + "/totalGenres"), model.profile.totalGenres);
+                set(ref(db, "/totalGenres"), model.profile.totalGenres);
             }
        }
        if(payload.setTotalPopularity !== undefined) {
-           if(model.totalUserAvgPop) {
-               set(ref(db, "totalUserPopularities"), model.totalUserAvgPop);
+           if(model.totalUserPopularities) {
+               set(ref(db, "totalUserPopularities"), model.totalUserPopularities);
            }
+       }
+       if(payload.setTotalUserGenres !== undefined) {
+           if(model.totalUserGenres) {
+               set(ref(db, "totalUserGenres"), model.totalUserGenres);
+           }
+       }
+       if(payload.setTotalUsers !== undefined) {
+          if(model.totalUsers) {
+                set(ref(db, "totalUsers"), model.totalUsers);
+          }
        }
     }
     model.addObserver(addFirebaseACB);
@@ -39,17 +48,45 @@ export function updateFirebaseFromModel(model) {
 export function updateModelFromFirebase(model) {
     onValue(ref(db, "totalUserPopularities"),
         (snapshot) => {
-            model.totalUserAvgPop = snapshot.val();
+            model.totalUserPopularities = snapshot.val();
+        }
+    );
+
+    onValue(ref(db, "totalUserGenres"),
+        (snapshot) => {
+            model.totalUserGenres = snapshot.val();
+        }
+    );
+
+    onValue(ref(db, "totalUsers"),
+        (snapshot) => {
+            model.totalUsers = snapshot.val();
         }
     );
 
     onChildAdded(ref(db, "users/"),
        (snapshot) => {
-         onValue(ref(db, "users/" + snapshot.val().id + "/avgPopularity"),
+         onValue(ref(db, "/avgPopularity"),
+         (snapshot2) => {
+            if(snapshot2.val() != null) {
+                model.totalUserPopularities += snapshot2.val();
+                model.setTotalPopularity(model.totalUserPopularities);
+            }
+            model.totalUsers = model.totalUsers + 1;
+            model.setTotalUsers(model.totalUsers);
+         })
+       }, (errorObject) => {
+         console.log('The read failed: ' + errorObject.name);
+       }
+    );
+
+    onChildAdded(ref(db, "users/"),
+       (snapshot) => {
+         onValue(ref(db, "/totalGenres"),
          (snapshot2) => {
             if(snapshot2.val() != null)
-                model.totalUserAvgPop += snapshot2.val();
-                model.setTotalPopularity(model.totalUserAvgPop);
+                model.totalUserGenres += snapshot2.val();
+                model.setTotalUserGenres(model.totalUserGenres);
          })
        }, (errorObject) => {
          console.log('The read failed: ' + errorObject.name);

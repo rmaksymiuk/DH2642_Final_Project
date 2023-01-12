@@ -12,7 +12,9 @@ export default function AvgPopularityView(props){
             The average popularity of all of our users is
         </div>
         <div className = "number">
-            {props.averagePop}
+            {
+                props.average
+            }
         </div>
     </div>
     );
