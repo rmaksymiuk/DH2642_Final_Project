@@ -8,7 +8,7 @@ export default function TotalGenresView(props){
             <b>{props.genres}</b>
         </div>
         <div className = "introText">
-            Genres this past year!
+            genres this past year!
         </div>
         <div className = "introText">
             The average number of genres listened to by our users is
