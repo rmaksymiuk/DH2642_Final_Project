@@ -4,16 +4,13 @@ import TopGenreView from "../Listening/TopGenreView.js";
 import "./Listening.css"
 import TopYearPopularityView from "./TopYearPopularityView.js";
 import React, { useEffect, useState } from "react";
-import { getDatabase, ref, push, onValue, set } from "firebase/database";
+import { getDatabase} from "firebase/database";
 
 export default function Listening(props) {
-    const [promiseState] = useState({promise: null, data: null, error: null})
-    const [,reRender]= useState({});
-    const [artists, setArtists]=React.useState(props.model.currentArtistPromiseState.data);
-    const [tracks, setTracks]=React.useState(props.model.currentTrackPromiseState.data);
-    const[totalUserPopularities, setTotalUserPopularities] = React.useState(props.model.totalUserPopularities);
-    const[totalUsers, setTotalUsers] = React.useState(props.model.totalUsers);
-    const[totalUserGenres, setTotalUserGenres] = React.useState(props.model.totalUserGenres);
+    const [artists, setArtists]=useState(props.model.currentArtistPromiseState.data);
+    const [tracks, setTracks]=useState(props.model.currentTrackPromiseState.data);
+    const[totalUserPopularities, setTotalUserPopularities] = useState(props.model.totalUserPopularities);
+    const[totalUsers, setTotalUsers] = useState(props.model.totalUsers);
 
     const [numGenres, setNumGenres] = useState();
     const [averageGenres, setAverageGenres] = useState();
@@ -24,7 +21,7 @@ export default function Listening(props) {
     const [page, setPage] = useState(0);
     const pages = ["Popularity", "Total Genres", "Top Genres", "Top Years"];
 
-    React.useEffect(wasCreatedACB, []);
+    useEffect(wasCreatedACB, []);
 
     function observerACB(){
         setArtists(props.model.currentArtistPromiseState.data);
@@ -37,7 +34,7 @@ export default function Listening(props) {
             getTopGenresACB();
             getAverageYearACB();
         };
-         if(totalUserPopularities && totalUserGenres && totalUsers) {
+         if(totalUserPopularities && totalUsers &&!totalUserAvgPop&&!averageGenres) {
             getUsersAvgPopACB();
             getUsersGenresACB();
          }
@@ -51,17 +48,13 @@ export default function Listening(props) {
             getTopGenresACB();
             getAverageYearACB();
          };
-         if(totalUserPopularities && totalUserGenres && totalUsers) {
+         if(totalUserPopularities && totalUsers) {
             getUsersAvgPopACB();
             getUsersGenresACB();
          }
         return function isTakenDownACB(){
             props.model.removeObserver(observerACB);
         };
-    }
-
-    function notifyACB(){
-        reRender({});
     }
 
     function getArtistGenreACB(artist) {
@@ -90,7 +83,7 @@ export default function Listening(props) {
     }
 
     function getUsersGenresACB() {
-        const genreSum = totalUserGenres;
+        const genreSum = props.model.totalUserGenres;
         const users = totalUsers;
         setAverageGenres(Math.round(genreSum/users));
     }
@@ -162,8 +155,12 @@ export default function Listening(props) {
         getAveragePopularityACB();
         getTopGenresACB();
         getAverageYearACB();
-    };
+    }
 
+    if(totalUserPopularities && totalUsers &&!totalUserAvgPop&&!averageGenres) {
+        getUsersAvgPopACB();
+        getUsersGenresACB();
+    }
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
     if(page === 0) {
         let message = "";
