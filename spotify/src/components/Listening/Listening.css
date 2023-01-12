@@ -63,3 +63,8 @@
 ul {
     list-style-type: none;
 }
+
+.personalizedMessage {
+    text-align: center;
+    font-size: 30px;
+}

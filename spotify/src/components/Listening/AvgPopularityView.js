@@ -16,8 +16,9 @@ export default function AvgPopularityView(props){
                 props.average
             }
         </div>
-        <div>
-            {props.message}
+        <br></br><br></br>
+        <div className = "personalizedMessage">
+            <b><i>{props.message}</i></b>
         </div>
     </div>
     );
