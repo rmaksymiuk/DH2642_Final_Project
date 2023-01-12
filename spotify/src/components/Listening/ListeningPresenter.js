@@ -166,7 +166,17 @@ export default function Listening(props) {
 
     let component = <TopYearPopularityView topYears = {topYearPopularity}/>
     if(page === 0) {
-        component = <AvgPopularityView popularity = {avgPopularity} average = {totalUserAvgPop}/>;
+        let message = "";
+        if(avgPopularity < 30) {
+            message = "You are an underground indie queen. Don't let anyone try and pluck you out of the alt stream"
+        } else if(avgPopularity < totalUserAvgPop) {
+            message = "You tend to go your own way with music but won't stop yourself from indulging in what others are also listening to"
+        } else if(avgPopularity < 85) {
+            message = "You like to stick with the crowd but venture out into the musical universe every now and again"
+        } else {
+            message = "Do you only listen to the top 40? If so that is impressive, maybe try exploring some of our recommendations"
+        }
+        component = <AvgPopularityView popularity = {avgPopularity} average = {totalUserAvgPop} message = {message}/>;
     } else if(page === 1) {
         component = <TotalGenresView avgGenres = {averageGenres} genres = {numGenres}/>;
     } else if(page === 2) {

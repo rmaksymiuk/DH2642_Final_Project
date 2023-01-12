@@ -33,8 +33,15 @@ export default function RecommendationsView(props) {
 
     return (
       <>
-        <h1 className="title">{"Recommendations"}</h1>
-        <br/>
+        <h1 className="title">{"Your Recommendations"}</h1>
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+        }}>
+            <h2>Start exploring these new tracks based on your current favorites</h2>
+        </div>
+        <br></br>
         <div style={{
             display: 'flex',
             alignItems: 'center',

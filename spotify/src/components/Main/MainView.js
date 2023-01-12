@@ -53,7 +53,7 @@ export default function MainView(props){
           </ul>
       </div>
       <div className = "button">
-        <Button variant="contained" size="large" color="success" href="topTracks">Start Exploring</Button>
+        <Button variant="contained" size="large" color="success" href="topTracks">Start Exploring!</Button>
       </div>
     </div>
   );
