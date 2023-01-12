@@ -33,7 +33,7 @@ export default function MainView(props){
               <img className="mainimg" src={headset} alt="headset"/>
               <div className="specific">
                 <div className="tit">Listening to music</div>
-                <div className="titexp">Enjoy listening to your most listened to tracks or artists in your spotify app. Simply <b>click on the track or artists !</b></div>
+                <div className="titexp">Enjoy listening to your most listened to tracks or artists in your spotify app. Simply <b>click on the track or artist!</b></div>
               </div>
             </li>
             <li className="logy">

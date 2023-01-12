@@ -23,7 +23,7 @@ export default function TopArtistView(props){
     return (
       <>
         <div className="container">
-          <h1 className="title">{"Top Artists ("+tabArr[index]+")"}</h1>
+          <h1 className="title">{"Your Top Artists ("+tabArr[index]+")"}</h1>
           <div className="menu">
             <ul className="tabs">
                 <li className={props.index===0?'is_active':''} onClick={()=>{pageChangeACB(0)}}>{tabArr[0]}</li>
