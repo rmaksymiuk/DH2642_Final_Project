@@ -5,13 +5,15 @@ import list from './image/list.png';
 import headset from './image/headset.png';
 import thumbsup from './image/thumbsup.png';
 import history from './image/history.png';
+import Button from '@mui/material/Button';
+
 export default function MainView(props){
   return (
     <div className="container">
         <div className="profiles">
             <div className="animate__animated animate__pulse animate__slower animate__infinite">
                 {props.token&&props.data?.display_name?
-                    <div className="message">{"Hi "+ (props.data?.display_name?props.data?.display_name:"")+"!"}</div>
+                    <div className="message">{"Hi "+ (props.data?.display_name?props.data?.display_name:"")+", welcome to Trackify!"}</div>
                     :<div className="message">Welcome to Trackify!</div>}
             </div>
             {props.token&&props.data?.images?
@@ -49,6 +51,9 @@ export default function MainView(props){
               </div>
             </li>
           </ul>
+      </div>
+      <div className = "button">
+        <Button variant="contained" size="large" color="success" href="topTracks">Start Exploring</Button>
       </div>
     </div>
   );

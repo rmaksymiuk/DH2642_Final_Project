@@ -70,4 +70,10 @@
 .funcexp{
     justify-content: center;
     align-items: center;
+    margin-bottom: 0px;
+}
+
+.button{
+    margin-top: 0px;
+    margin-bottom: 100px;
 }
