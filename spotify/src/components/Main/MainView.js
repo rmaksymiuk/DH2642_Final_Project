@@ -11,7 +11,7 @@ export default function MainView(props){
         <div className="profiles">
             <div className="animate__animated animate__pulse animate__slower animate__infinite">
                 {props.token&&props.data?.display_name?
-                    <div className="message">{"HI! "+ (props.data?.display_name?props.data?.display_name:"")}</div>
+                    <div className="message">{"Hi "+ (props.data?.display_name?props.data?.display_name:"")+"!"}</div>
                     :<div className="message">Welcome to Trackify!</div>}
             </div>
             {props.token&&props.data?.images?
@@ -24,28 +24,28 @@ export default function MainView(props){
               <img className="mainimg" src={list} alt="chart logo"/>
               <div className="specific">
                 <div className="tit">Your own charts</div>
-                <div className="titexp">View your most listened tracks and artists. You can also switch between 3 different time periods. Your data is updated almost every day.</div>
+                <div className="titexp">View your most listened to tracks and artists. Switch between different time periods to see how your listening habits have changed! <b>Your data is updated almost every day.</b></div>
               </div>
             </li>
             <li className="logy">
               <img className="mainimg" src={headset} alt="headset"/>
               <div className="specific">
                 <div className="tit">Listening to music</div>
-                <div className="titexp">Enjoy listening to your most listened tracks in your spotify app. You can also enjoy listening to your most listened artists' musics</div>
+                <div className="titexp">Enjoy listening to your most listened to tracks or artists in your spotify app. Simply <b>click on the track or artists !</b></div>
               </div>
             </li>
             <li className="logy">
               <img className="mainimg" src={thumbsup} alt="thumbs up"/>
               <div className="specific">
                 <div className="tit">Recommendations based on your play records</div>
-                <div className="titexp">View our recommendations for you based on your most listened tracks and artists.</div>
+                <div className="titexp">View our <b>personalized recommendations</b> based on a unique combination your most listened tracks and artists.</div>
               </div>
             </li>
             <li className="logy logy3">
               <img className="mainimg" src={history} alt="history"/>
               <div className="specific">
                 <div className="tit">Overall Statistics</div>
-                <div className="titexp">Get information such as your favorite artist's average popularity, how many genres you have listened to, your top 3 favorite genres and so on!</div>
+                <div className="titexp"><b>Get information on your listening habits</b> such as how popular the artists you listen to tend to be, how many different genres you have listened to, your favorite genres and so on!</div>
               </div>
             </li>
           </ul>

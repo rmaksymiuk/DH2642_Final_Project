@@ -25,6 +25,11 @@ export function updateFirebaseFromModel(model) {
                 set(ref(db, "/totalGenres"), model.profile.totalGenres);
             }
        }
+       if(payload.setToken !== undefined) {
+            if(model.token) {
+                set(ref(db, "/token"), model.token);
+            }
+       }
        if(payload.setTotalPopularity !== undefined) {
            if(model.totalUserPopularities) {
                set(ref(db, "totalUserPopularities"), model.totalUserPopularities);

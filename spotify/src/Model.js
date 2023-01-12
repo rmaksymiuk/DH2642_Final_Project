@@ -76,14 +76,6 @@ export default class Model {
         this.notifyObservers(payload);
     }
 
-    setTotalAvgPop(average) {
-        if(average != null) {
-            this.totalUserAvgPop = average;
-            const payload = {"setTotalAvgPop" : average};
-            this.notifyObservers(payload);
-        }
-    }
-
     setTotalUsers(users) {
         if(users != null) {
             this.totalUsers = users;
